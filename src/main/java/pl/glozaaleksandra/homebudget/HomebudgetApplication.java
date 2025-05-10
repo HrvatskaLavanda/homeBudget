@@ -11,8 +11,23 @@ public class HomebudgetApplication {
     public static void main(String[] args) {
 //		SpringApplication.run(HomebudgetApplication.class, args);
         ListBasedCategoryRepository listBasedCategoryRepository = new ListBasedCategoryRepository();
-        List<Category> all = listBasedCategoryRepository.findAll();
-        System.out.println(all);
+
+        var category = new Category("food");
+        var category1 = new Category("cleaning");
+        var category2 = new Category("development");
+        var category3 = new Category("entertainment");
+
+        listBasedCategoryRepository.save(category);
+        listBasedCategoryRepository.save(category1);
+        listBasedCategoryRepository.save(category2);
+        listBasedCategoryRepository.save(category3);
+
+        List<Category> categories = listBasedCategoryRepository.findAll();
+
+        System.out.println("Category: ");
+        for (Category c : categories) {
+            System.out.println(c.getName());
+        }
     }
 
 }
