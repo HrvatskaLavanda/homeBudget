@@ -16,4 +16,9 @@ public class ListBasedCategoryRepository implements CategoryRepository {
     public void save(Category category) {
         categories.add(category);
     }
+
+    @Override
+    public void delete(Category categoryToBeRemoved) {
+        categories.remove(categoryToBeRemoved);
+    }
 }

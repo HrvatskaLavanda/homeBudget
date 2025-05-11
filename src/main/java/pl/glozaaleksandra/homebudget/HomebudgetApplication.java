@@ -22,9 +22,10 @@ public class HomebudgetApplication {
         listBasedCategoryRepository.save(category2);
         listBasedCategoryRepository.save(category3);
 
+        listBasedCategoryRepository.delete(category1);
+
         List<Category> categories = listBasedCategoryRepository.findAll();
 
-        System.out.println("Category: ");
         for (Category c : categories) {
             System.out.println(c.getName());
         }
