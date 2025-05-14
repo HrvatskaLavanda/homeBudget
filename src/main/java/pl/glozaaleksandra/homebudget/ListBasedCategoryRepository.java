@@ -21,4 +21,16 @@ public class ListBasedCategoryRepository implements CategoryRepository {
     public void delete(Category categoryToBeRemoved) {
         categories.remove(categoryToBeRemoved);
     }
+
+    @Override
+    public void update(Category category, String newName) {
+        if (category == null) {
+            throw new NullPointerException("Category is null. The name cannot be changed");
+        }
+        for (Category c : categories) {
+            if (c.equals(category)) {
+                c.setName(newName);
+            }
+        }
+    }
 }

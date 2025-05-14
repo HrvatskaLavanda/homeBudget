@@ -9,4 +9,6 @@ public interface CategoryRepository {
 
     void delete(Category categoryToBeRemoved);
 
+void update(Category category, String newName);
+
 }
