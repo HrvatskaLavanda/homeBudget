@@ -25,7 +25,7 @@ public class ListBasedCategoryRepository implements CategoryRepository {
     @Override
     public void update(Category category, String newName) {
         if (category == null) {
-            throw new NullPointerException("Category is null. The name cannot be changed");
+            throw new IllegalArgumentException("Category not found. The name cannot be changed");
         }
         for (Category c : categories) {
             if (c.equals(category)) {
