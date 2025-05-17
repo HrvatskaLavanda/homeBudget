@@ -7,8 +7,8 @@ public interface CategoryRepository {
 
     void save(Category category);
 
-    void delete(Category categoryToBeRemoved);
+    void delete(String categoryName);
 
-void update(Category category, String newName);
+    void update(Category category, String newName);
 
 }

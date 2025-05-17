@@ -22,7 +22,7 @@ public class HomebudgetApplication {
         listBasedCategoryRepository.save(category2);
         listBasedCategoryRepository.save(category3);
 
-        listBasedCategoryRepository.delete(category1);
+        listBasedCategoryRepository.delete("food");
 
         List<Category> categories = listBasedCategoryRepository.findAll();
 

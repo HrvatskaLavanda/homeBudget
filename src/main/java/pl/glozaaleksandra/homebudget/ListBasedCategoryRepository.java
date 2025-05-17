@@ -1,6 +1,7 @@
 package pl.glozaaleksandra.homebudget;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ListBasedCategoryRepository implements CategoryRepository {
@@ -17,9 +18,20 @@ public class ListBasedCategoryRepository implements CategoryRepository {
         categories.add(category);
     }
 
-    @Override
-    public void delete(Category categoryToBeRemoved) {
-        categories.remove(categoryToBeRemoved);
+    public void delete(String categoryName) {
+        boolean found = false;
+        Iterator<Category> categoryIterator = categories.iterator();
+        while ((categoryIterator.hasNext())) {
+            Category nextCategory = categoryIterator.next();
+            if (nextCategory.getName().equals(categoryName)) {
+                categoryIterator.remove();
+                found = true;
+            }
+        }
+
+        if (!found) {
+            throw new IllegalArgumentException("Category not found. The category cannot be deleted");
+        }
     }
 
     @Override
