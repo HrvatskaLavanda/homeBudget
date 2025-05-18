@@ -11,4 +11,5 @@ public interface CategoryRepository {
 
     void update(Category category, String newName);
 
+    Category findByName(String categoryName);
 }

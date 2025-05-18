@@ -28,9 +28,13 @@ public class HomebudgetApplication {
 
         listBasedCategoryRepository.update(category3, "leisure");
 
+        Category foundCategory = listBasedCategoryRepository.findByName("leisure");
+
         for (Category c : categories) {
             System.out.println(c.getName());
         }
+
+        System.out.println("Found category: " + foundCategory);
     }
 
 }
