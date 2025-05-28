@@ -19,32 +19,9 @@ public class ListBasedCategoryRepository implements CategoryRepository {
     }
 
     public void delete(String categoryName) {
-        boolean found = false;
-        Iterator<Category> categoryIterator = categories.iterator();
-        while ((categoryIterator.hasNext())) {
-            Category nextCategory = categoryIterator.next();
-            if (nextCategory.getName().equals(categoryName)) {
-                categoryIterator.remove();
-                found = true;
-            }
-        }
-
-        if (!found) {
-            throw new IllegalArgumentException("Category not found. The category cannot be deleted");
-        }
+        Category categoryToBeDeleted = findByName(categoryName);
+        categories.remove(categoryToBeDeleted);
     }
-
-//    @Override
-//    public void update(Category category, String newName) {
-//        if (category == null) {
-//            throw new IllegalArgumentException("Category not found. The name cannot be changed");
-//        }
-//        for (Category c : categories) {
-//            if (c.equals(category)) {
-//                c.setName(newName);
-//            }
-//        }
-//    }
 
     @Override
     public void update(Category category, String newName) {
@@ -60,6 +37,6 @@ public class ListBasedCategoryRepository implements CategoryRepository {
                 return category;
             }
         }
-        throw new IllegalArgumentException("Category not found");
+        throw new IllegalArgumentException("Category " + categoryName + " not found");
     }
 }
