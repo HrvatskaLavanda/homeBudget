@@ -1,5 +1,7 @@
 package pl.glozaaleksandra.homebudget;
 
+import pl.glozaaleksandra.homebudget.category.Category;
+
 import java.math.BigDecimal;
 
 public class Product {

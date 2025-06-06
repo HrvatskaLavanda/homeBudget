@@ -1,4 +1,4 @@
-package pl.glozaaleksandra.homebudget;
+package pl.glozaaleksandra.homebudget.category;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
-package pl.glozaaleksandra.homebudget;
+package pl.glozaaleksandra.homebudget.category;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ListBasedCategoryRepository implements CategoryRepository {

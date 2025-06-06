@@ -1,7 +1,8 @@
 package pl.glozaaleksandra.homebudget;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pl.glozaaleksandra.homebudget.category.Category;
+import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
 
 import java.util.List;
 
