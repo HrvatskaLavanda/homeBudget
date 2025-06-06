@@ -2,7 +2,9 @@ package pl.glozaaleksandra.homebudget.category;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ListBasedCategoryRepository implements CategoryRepository {
 
     private List<Category> categories = new ArrayList<>();
