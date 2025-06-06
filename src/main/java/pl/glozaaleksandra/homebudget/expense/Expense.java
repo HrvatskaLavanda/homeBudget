@@ -1,7 +1,7 @@
 package pl.glozaaleksandra.homebudget.expense;
 
 import pl.glozaaleksandra.homebudget.Person;
-import pl.glozaaleksandra.homebudget.Product;
+import pl.glozaaleksandra.homebudget.product.Product;
 
 import java.math.BigDecimal;
 import java.time.Instant;
