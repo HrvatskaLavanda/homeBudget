@@ -16,4 +16,9 @@ public class ListBasedExpenseRepository implements ExpenseRepository {
     public void save(Expense expense) {
         expenses.add(expense);
     }
+
+    @Override
+    public void delete(Expense expense) {
+        expenses.remove(expense);
+    }
 }

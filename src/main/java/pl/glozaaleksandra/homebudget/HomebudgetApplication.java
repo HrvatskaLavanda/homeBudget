@@ -28,10 +28,13 @@ public class HomebudgetApplication {
         listBasedCategoryRepository.save(category3);
 
         var person = new Person("Kasia");
+        var person1 = new Person("Olek");
 
         var expense = new Expense(person, null, Instant.now());
+        var expense1 = new Expense(person1, null, Instant.now());
 
         listBasedExpenseRepository.save(expense);
+        listBasedExpenseRepository.save(expense1);
 
         List<Expense> expenses = listBasedExpenseRepository.findAll();
 
