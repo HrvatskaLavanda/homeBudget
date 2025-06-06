@@ -1,5 +1,7 @@
 package pl.glozaaleksandra.homebudget.expense;
 
+import pl.glozaaleksandra.homebudget.Person;
+
 import java.util.List;
 
 public interface ExpenseRepository {
@@ -8,4 +10,6 @@ public interface ExpenseRepository {
     void save(Expense expense);
 
     void delete(Expense expense);
+
+    Expense findByPerson(Person buyer);
 }

@@ -36,6 +36,8 @@ public class HomebudgetApplication {
         listBasedExpenseRepository.save(expense);
         listBasedExpenseRepository.save(expense1);
 
+        listBasedExpenseRepository.delete(expense);
+
         List<Expense> expenses = listBasedExpenseRepository.findAll();
 
         listBasedCategoryRepository.delete("food");
@@ -46,11 +48,14 @@ public class HomebudgetApplication {
 
         Category foundCategory = listBasedCategoryRepository.findByName("bread");
 
+        Expense foundExpense = listBasedExpenseRepository.findByPerson(person1);
+
         for (Category c : categories) {
             System.out.println(c.getName());
         }
 
         System.out.println("Found category: " + foundCategory);
+        System.out.println("Found expense: " + foundExpense);
 
         System.out.println("Expenses:");
         for (Expense e : expenses) {
