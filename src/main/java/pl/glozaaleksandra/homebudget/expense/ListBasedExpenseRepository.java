@@ -11,4 +11,9 @@ public class ListBasedExpenseRepository implements ExpenseRepository {
     public List<Expense> findAll() {
         return expenses;
     }
+
+    @Override
+    public void save(Expense expense) {
+        expenses.add(expense);
+    }
 }
