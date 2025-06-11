@@ -2,6 +2,7 @@ package pl.glozaaleksandra.homebudget;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.glozaaleksandra.homebudget.category.Category;
+import pl.glozaaleksandra.homebudget.category.CategoryRepository;
 import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
 import pl.glozaaleksandra.homebudget.expense.Expense;
 import pl.glozaaleksandra.homebudget.expense.ListBasedExpenseRepository;
@@ -14,7 +15,7 @@ public class HomebudgetApplication {
 
     public static void main(String[] args) {
 //		SpringApplication.run(HomebudgetApplication.class, args);
-        ListBasedCategoryRepository listBasedCategoryRepository = new ListBasedCategoryRepository();
+        CategoryRepository listBasedCategoryRepository = new ListBasedCategoryRepository();
         ListBasedExpenseRepository listBasedExpenseRepository = new ListBasedExpenseRepository();
 
         var category = new Category("food");
