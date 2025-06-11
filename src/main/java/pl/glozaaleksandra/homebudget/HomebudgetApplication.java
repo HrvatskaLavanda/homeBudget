@@ -5,6 +5,7 @@ import pl.glozaaleksandra.homebudget.category.Category;
 import pl.glozaaleksandra.homebudget.category.CategoryRepository;
 import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
 import pl.glozaaleksandra.homebudget.expense.Expense;
+import pl.glozaaleksandra.homebudget.expense.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.expense.ListBasedExpenseRepository;
 
 import java.time.Instant;
@@ -16,7 +17,7 @@ public class HomebudgetApplication {
     public static void main(String[] args) {
 //		SpringApplication.run(HomebudgetApplication.class, args);
         CategoryRepository listBasedCategoryRepository = new ListBasedCategoryRepository();
-        ListBasedExpenseRepository listBasedExpenseRepository = new ListBasedExpenseRepository();
+        ExpenseRepository listBasedExpenseRepository = new ListBasedExpenseRepository();
 
         var category = new Category("food");
         var category1 = new Category("cleaning");
@@ -31,8 +32,16 @@ public class HomebudgetApplication {
         var person = new Person("Kasia");
         var person1 = new Person("Olek");
 
-        var expense = new Expense(person, null, Instant.now());
-        var expense1 = new Expense(person1, null, Instant.now());
+
+        var expense = Expense.builder()
+                .buyer(person)
+                .expenseDatetime(Instant.now())
+                .build();
+
+        var expense1 = Expense.builder()
+                .buyer(person1)
+                .expenseDatetime(Instant.now())
+                .build();
 
         listBasedExpenseRepository.save(expense);
         listBasedExpenseRepository.save(expense1);
