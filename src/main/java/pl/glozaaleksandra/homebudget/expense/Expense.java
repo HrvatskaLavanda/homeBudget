@@ -1,19 +1,24 @@
-package pl.glozaaleksandra.homebudget;
+package pl.glozaaleksandra.homebudget.expense;
+
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+import pl.glozaaleksandra.homebudget.Person;
+import pl.glozaaleksandra.homebudget.product.Product;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
+@Builder
+@Getter
+@EqualsAndHashCode
+@ToString
 public class Expense {
     private Person buyer;
     private List<Product> products;
     private Instant expenseDatetime;
-
-    public Expense(Person buyer, List<Product> products, Instant expenseDatetime) {
-        this.buyer = buyer;
-        this.products = products;
-        this.expenseDatetime = expenseDatetime;
-    }
 
     public BigDecimal getFullPrice() {
         BigDecimal sumPrice = BigDecimal.valueOf(0);

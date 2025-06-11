@@ -1,4 +1,6 @@
-package pl.glozaaleksandra.homebudget;
+package pl.glozaaleksandra.homebudget.product;
+
+import pl.glozaaleksandra.homebudget.category.Category;
 
 import java.math.BigDecimal;
 

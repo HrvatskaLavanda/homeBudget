@@ -1,8 +1,14 @@
 package pl.glozaaleksandra.homebudget;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pl.glozaaleksandra.homebudget.category.Category;
+import pl.glozaaleksandra.homebudget.category.CategoryRepository;
+import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
+import pl.glozaaleksandra.homebudget.expense.Expense;
+import pl.glozaaleksandra.homebudget.expense.ExpenseRepository;
+import pl.glozaaleksandra.homebudget.expense.ListBasedExpenseRepository;
 
+import java.time.Instant;
 import java.util.List;
 
 @SpringBootApplication
@@ -10,7 +16,8 @@ public class HomebudgetApplication {
 
     public static void main(String[] args) {
 //		SpringApplication.run(HomebudgetApplication.class, args);
-        ListBasedCategoryRepository listBasedCategoryRepository = new ListBasedCategoryRepository();
+        CategoryRepository listBasedCategoryRepository = new ListBasedCategoryRepository();
+        ExpenseRepository listBasedExpenseRepository = new ListBasedExpenseRepository();
 
         var category = new Category("food");
         var category1 = new Category("cleaning");
@@ -22,6 +29,27 @@ public class HomebudgetApplication {
         listBasedCategoryRepository.save(category2);
         listBasedCategoryRepository.save(category3);
 
+        var person = new Person("Kasia");
+        var person1 = new Person("Olek");
+
+
+        var expense = Expense.builder()
+                .buyer(person)
+                .expenseDatetime(Instant.now())
+                .build();
+
+        var expense1 = Expense.builder()
+                .buyer(person1)
+                .expenseDatetime(Instant.now())
+                .build();
+
+        listBasedExpenseRepository.save(expense);
+        listBasedExpenseRepository.save(expense1);
+
+        listBasedExpenseRepository.delete(expense);
+
+        List<Expense> expenses = listBasedExpenseRepository.findAll();
+
         listBasedCategoryRepository.delete("food");
 
         List<Category> categories = listBasedCategoryRepository.findAll();
@@ -30,11 +58,21 @@ public class HomebudgetApplication {
 
         Category foundCategory = listBasedCategoryRepository.findByName("bread");
 
+        Expense foundExpense = listBasedExpenseRepository.findByPerson(person1);
+
         for (Category c : categories) {
             System.out.println(c.getName());
         }
 
         System.out.println("Found category: " + foundCategory);
+        System.out.println("Found expense: " + foundExpense);
+
+        System.out.println("Expenses:");
+        for (Expense e : expenses) {
+            System.out.println(e);
+        }
+
+
     }
 
 }
