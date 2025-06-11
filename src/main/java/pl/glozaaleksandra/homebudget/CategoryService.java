@@ -1,8 +1,8 @@
 package pl.glozaaleksandra.homebudget;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.glozaaleksandra.homebudget.category.CategoryRepository;
 
 @Service
 public class CategoryService {
@@ -15,4 +15,8 @@ public class CategoryService {
   public CategoryRepository getCategoryRepository() {
     return categoryRepository;
   }
+
+  public List<Category> findAll() {
+    return List.of();
+}
 }
