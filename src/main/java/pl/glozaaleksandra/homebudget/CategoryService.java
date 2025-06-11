@@ -2,6 +2,7 @@ package pl.glozaaleksandra.homebudget;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.glozaaleksandra.homebudget.category.CategoryRepository;
 
 @Service
 public class CategoryService {

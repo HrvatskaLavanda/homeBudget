@@ -1,6 +1,8 @@
 package pl.glozaaleksandra.homebudget;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import pl.glozaaleksandra.homebudget.category.Category;
 import pl.glozaaleksandra.homebudget.category.CategoryRepository;
 import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
@@ -10,7 +12,6 @@ import pl.glozaaleksandra.homebudget.expense.ListBasedExpenseRepository;
 
 import java.time.Instant;
 import java.util.List;
-import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class HomebudgetApplication {
