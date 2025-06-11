@@ -1,5 +1,7 @@
 package pl.glozaaleksandra.homebudget.category;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.context.annotation.Configuration;
