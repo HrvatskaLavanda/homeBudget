@@ -1,6 +1,9 @@
 package pl.glozaaleksandra.homebudget;
 
-public class CategoryRepositoryFactoryImpl implements CategoryRepositoryFactory{
+import pl.glozaaleksandra.homebudget.category.CategoryRepository;
+import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
+
+public class CategoryRepositoryFactoryImpl implements CategoryRepositoryFactory {
   @Override
   public CategoryRepository createCategoryRepository() {
     return new ListBasedCategoryRepository();

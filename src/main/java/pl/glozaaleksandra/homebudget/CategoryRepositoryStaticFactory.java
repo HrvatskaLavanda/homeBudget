@@ -5,7 +5,7 @@ import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
 
 public class CategoryRepositoryStaticFactory {
 
-  public static CategoryRepository categoryRepository() {
-    return new ListBasedCategoryRepository();
-  }
+    public static CategoryRepository categoryRepository() {
+        return new ListBasedCategoryRepository();
+    }
 }
