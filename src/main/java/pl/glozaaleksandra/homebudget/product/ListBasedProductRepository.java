@@ -11,4 +11,10 @@ public class ListBasedProductRepository implements ProductRepository {
     public List<Product> findAll() {
         return products;
     }
+
+    @Override
+    public Product save(Product product) {
+        products.add(product);
+        return product;
+    }
 }
