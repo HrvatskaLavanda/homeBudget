@@ -17,4 +17,14 @@ public class ListBasedProductRepository implements ProductRepository {
         products.add(product);
         return product;
     }
+
+    @Override
+    public Product findByName(String productName) {
+        for (Product product : products) {
+            if (productName.equals(product.getName())) {
+                return product;
+            }
+        }
+        throw new IllegalArgumentException("Product:  " + productName + " not found");
+    }
 }
