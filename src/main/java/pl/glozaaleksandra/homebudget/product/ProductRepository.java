@@ -8,4 +8,6 @@ public interface ProductRepository {
     Product save(Product product);
 
     Product findByName(String productName);
+
+    void update(Product product, String newProductName);
 }
