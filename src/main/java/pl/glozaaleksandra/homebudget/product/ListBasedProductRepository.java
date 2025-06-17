@@ -33,4 +33,10 @@ public class ListBasedProductRepository implements ProductRepository {
         Product foundProduct = findByName(product.getName());
         foundProduct.setName(newProductName);
     }
+
+    @Override
+    public void delete(String productName) {
+        Product productToBeDeleted = findByName(productName);
+        products.remove(productToBeDeleted);
+    }
 }
