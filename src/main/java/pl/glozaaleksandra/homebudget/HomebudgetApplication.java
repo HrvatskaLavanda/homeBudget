@@ -10,28 +10,6 @@ import java.util.List;
 public class HomebudgetApplication {
 
     public static void main(String[] args) {
-
-//        // 1. tworzenie przez new
-//        CategoryRepository categoryRepository = new ListBasedCategoryRepository();
-//        CategoryService categoryService = new CategoryService(categoryRepository);
-//
-//        // 2. Fabryka
-//        CategoryRepositoryFactory categoryRepositoryFactory = new CategoryRepositoryFactoryImpl();
-//        CategoryRepository categoryRepository2 = categoryRepositoryFactory.createCategoryRepository();
-//
-//        // 3. statyczna metoda fabryczna
-//        CategoryRepository categoryRepository3 = CategoryRepositoryStaticFactory.categoryRepository();
-//
-//        // 4. odwracamy! NIE MY robimy "new" - Inversion Of Control - Dependency Injection
-//        ConfigurableApplicationContext context = SpringApplication.run(HomebudgetApplication.class, args);
-//        for (String beanDefinitionName : context.getBeanDefinitionNames()) {
-//            System.out.println(beanDefinitionName);
-//        }
-//
-//        CategoryRepository category4 = context.getBean(ListBasedCategoryRepository.class);
-//        CategoryService categoryService1 = context.getBean(CategoryService.class);
-//        System.out.println("czy spring widzi?" + categoryService1.getCategoryRepository());
-
         ListBasedCategoryRepository listBasedCategoryRepository = new ListBasedCategoryRepository();
 
         var category = new Category("food");
