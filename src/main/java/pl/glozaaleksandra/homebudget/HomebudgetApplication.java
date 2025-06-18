@@ -2,9 +2,11 @@ package pl.glozaaleksandra.homebudget;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.glozaaleksandra.homebudget.category.Category;
+import pl.glozaaleksandra.homebudget.category.CategoryRepository;
 import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
 import pl.glozaaleksandra.homebudget.product.ListBasedProductRepository;
 import pl.glozaaleksandra.homebudget.product.Product;
+import pl.glozaaleksandra.homebudget.product.ProductRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,8 +15,8 @@ import java.util.List;
 public class HomebudgetApplication {
 
     public static void main(String[] args) {
-        ListBasedCategoryRepository listBasedCategoryRepository = new ListBasedCategoryRepository();
-        ListBasedProductRepository listBasedProductRepository = new ListBasedProductRepository();
+        CategoryRepository categoryRepository = new ListBasedCategoryRepository();
+        ProductRepository productRepository = new ListBasedProductRepository();
 
         var category = new Category("food");
         var category1 = new Category("cleaning");
@@ -25,18 +27,18 @@ public class HomebudgetApplication {
         var product1 = new Product(BigDecimal.valueOf(9), "tonic", category);
         var product2 = new Product(BigDecimal.valueOf(5), "tuna", category);
 
-        listBasedCategoryRepository.save(category);
-        listBasedCategoryRepository.save(category1);
-        listBasedCategoryRepository.save(category2);
-        listBasedCategoryRepository.save(category3);
+        categoryRepository.save(category);
+        categoryRepository.save(category1);
+        categoryRepository.save(category2);
+        categoryRepository.save(category3);
 
-        listBasedCategoryRepository.delete("food");
+        categoryRepository.delete("food");
 
-        List<Category> categories = listBasedCategoryRepository.findAll();
+        List<Category> categories = categoryRepository.findAll();
 
-        listBasedCategoryRepository.update(category3, "bread");
+        categoryRepository.update(category3, "bread");
 
-        Category foundCategory = listBasedCategoryRepository.findByName("bread");
+        Category foundCategory = categoryRepository.findByName("bread");
 
         for (Category c : categories) {
             System.out.println(c.getName());
@@ -47,24 +49,25 @@ public class HomebudgetApplication {
         System.out.println("------------------------");
         System.out.println("Product section: ");
 
-        listBasedProductRepository.save(product);
-        listBasedProductRepository.save(product1);
-        listBasedProductRepository.save(product2);
+        productRepository.save(product);
+        productRepository.save(product1);
+        productRepository.save(product2);
 
-        List<Product> allProducts = listBasedProductRepository.findAll();
+
+        List<Product> allProducts = productRepository.findAll();
         System.out.println("All products: " + allProducts);
 
-        Product foundProduct = listBasedProductRepository.findByName("cinema");
+        Product foundProduct = productRepository.findByName("cinema");
         System.out.println("Found product: " + foundProduct);
 
-        listBasedProductRepository.update(product, "theater");
+        productRepository.update(product, "theater");
 
-        Product foundProduct1 = listBasedProductRepository.findByName("theater");
+        Product foundProduct1 = productRepository.findByName("theater");
         System.out.println("Found updated product: " + foundProduct1);
 
-        listBasedProductRepository.delete("theater");
+        productRepository.delete("theater");
 
-        List<Product> allProducts1 = listBasedProductRepository.findAll();
+        List<Product> allProducts1 = productRepository.findAll();
         System.out.println("All products: " + allProducts1);
 
 
