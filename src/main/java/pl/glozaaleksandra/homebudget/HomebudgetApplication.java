@@ -18,25 +18,25 @@ public class HomebudgetApplication {
         CategoryRepository categoryRepository = new ListBasedCategoryRepository();
         ProductRepository productRepository = new ListBasedProductRepository();
 
-        var category = new Category("food");
-        var category1 = new Category("cleaning");
-        var category2 = new Category("development");
-        var category3 = new Category("entertainment");
+        var foodCategory = new Category("food");
+        var cleaningCategory = new Category("cleaning");
+        var developmentCategory = new Category("development");
+        var entertainmentCategory = new Category("entertainment");
 
-        var product = new Product(BigDecimal.valueOf(100), "cinema", category3);
-        var product1 = new Product(BigDecimal.valueOf(9), "tonic", category);
-        var product2 = new Product(BigDecimal.valueOf(5), "tuna", category);
+        var cinema = new Product(BigDecimal.valueOf(100), "cinema", entertainmentCategory);
+        var tonic = new Product(BigDecimal.valueOf(9), "tonic", foodCategory);
+        var tuna = new Product(BigDecimal.valueOf(5), "tuna", foodCategory);
 
-        categoryRepository.save(category);
-        categoryRepository.save(category1);
-        categoryRepository.save(category2);
-        categoryRepository.save(category3);
+        categoryRepository.save(foodCategory);
+        categoryRepository.save(cleaningCategory);
+        categoryRepository.save(developmentCategory);
+        categoryRepository.save(entertainmentCategory);
 
         categoryRepository.delete("food");
 
         List<Category> categories = categoryRepository.findAll();
 
-        categoryRepository.update(category3, "bread");
+        categoryRepository.update(entertainmentCategory, "bread");
 
         Category foundCategory = categoryRepository.findByName("bread");
 
@@ -49,9 +49,9 @@ public class HomebudgetApplication {
         System.out.println("------------------------");
         System.out.println("Product section: ");
 
-        productRepository.save(product);
-        productRepository.save(product1);
-        productRepository.save(product2);
+        productRepository.save(cinema);
+        productRepository.save(tonic);
+        productRepository.save(tuna);
 
 
         List<Product> allProducts = productRepository.findAll();
@@ -60,7 +60,7 @@ public class HomebudgetApplication {
         Product foundProduct = productRepository.findByName("cinema");
         System.out.println("Found product: " + foundProduct);
 
-        productRepository.update(product, "theater");
+        productRepository.update(cinema, "theater");
 
         Product foundProduct1 = productRepository.findByName("theater");
         System.out.println("Found updated product: " + foundProduct1);
