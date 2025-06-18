@@ -1,8 +1,6 @@
-package pl.glozaaleksandra.homebudget;
+package pl.glozaaleksandra.homebudget.repository.category;
 
 import org.springframework.context.annotation.Configuration;
-import pl.glozaaleksandra.homebudget.category.CategoryRepository;
-import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
 
 @Configuration
 public class CategoryRepositoryConfiguration {

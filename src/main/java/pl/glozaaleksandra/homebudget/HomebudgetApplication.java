@@ -1,12 +1,12 @@
 package pl.glozaaleksandra.homebudget;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.glozaaleksandra.homebudget.category.Category;
-import pl.glozaaleksandra.homebudget.category.CategoryRepository;
-import pl.glozaaleksandra.homebudget.category.ListBasedCategoryRepository;
-import pl.glozaaleksandra.homebudget.product.ListBasedProductRepository;
-import pl.glozaaleksandra.homebudget.product.Product;
-import pl.glozaaleksandra.homebudget.product.ProductRepository;
+import pl.glozaaleksandra.homebudget.repository.category.Category;
+import pl.glozaaleksandra.homebudget.repository.category.CategoryRepository;
+import pl.glozaaleksandra.homebudget.repository.category.ListBasedCategoryRepository;
+import pl.glozaaleksandra.homebudget.repository.product.ListBasedProductRepository;
+import pl.glozaaleksandra.homebudget.repository.product.Product;
+import pl.glozaaleksandra.homebudget.repository.product.ProductRepository;
 
 import java.math.BigDecimal;
 import java.util.List;

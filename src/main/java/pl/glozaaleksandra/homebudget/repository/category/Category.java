@@ -1,4 +1,4 @@
-package pl.glozaaleksandra.homebudget.category;
+package pl.glozaaleksandra.homebudget.repository.category;
 
 import java.util.Objects;
 

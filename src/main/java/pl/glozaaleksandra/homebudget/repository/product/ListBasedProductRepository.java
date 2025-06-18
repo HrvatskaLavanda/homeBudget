@@ -1,4 +1,4 @@
-package pl.glozaaleksandra.homebudget.product;
+package pl.glozaaleksandra.homebudget.repository.product;
 
 import java.util.ArrayList;
 import java.util.List;
