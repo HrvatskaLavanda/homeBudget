@@ -1,4 +1,4 @@
-package pl.glozaaleksandra.homebudget.expense;
+package pl.glozaaleksandra.homebudget.repository.expense;
 
 import pl.glozaaleksandra.homebudget.Person;
 

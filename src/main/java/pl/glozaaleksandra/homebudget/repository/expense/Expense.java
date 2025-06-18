@@ -1,11 +1,11 @@
-package pl.glozaaleksandra.homebudget.expense;
+package pl.glozaaleksandra.homebudget.repository.expense;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import pl.glozaaleksandra.homebudget.Person;
-import pl.glozaaleksandra.homebudget.product.Product;
+import pl.glozaaleksandra.homebudget.repository.product.Product;
 
 import java.math.BigDecimal;
 import java.time.Instant;

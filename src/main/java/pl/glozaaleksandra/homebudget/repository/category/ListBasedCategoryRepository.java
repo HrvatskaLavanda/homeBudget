@@ -1,13 +1,9 @@
-package pl.glozaaleksandra.homebudget.category;
+package pl.glozaaleksandra.homebudget.repository.category;
 
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 
 @Repository
