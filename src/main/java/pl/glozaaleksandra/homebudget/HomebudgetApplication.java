@@ -53,7 +53,6 @@ public class HomebudgetApplication {
         productRepository.save(tonic);
         productRepository.save(tuna);
 
-
         List<Product> allProducts = productRepository.findAll();
         System.out.println("All products: " + allProducts);
 
@@ -69,8 +68,6 @@ public class HomebudgetApplication {
 
         allProducts = productRepository.findAll();
         System.out.println("All products: " + allProducts);
-
-
     }
 
 
