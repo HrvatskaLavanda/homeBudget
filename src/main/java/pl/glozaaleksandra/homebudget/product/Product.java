@@ -1,9 +1,15 @@
 package pl.glozaaleksandra.homebudget.product;
 
+import lombok.*;
 import pl.glozaaleksandra.homebudget.category.Category;
 
 import java.math.BigDecimal;
 
+@Builder
+@Getter
+@EqualsAndHashCode
+@ToString
+@Setter
 public class Product {
     private BigDecimal price;
     private String name;
