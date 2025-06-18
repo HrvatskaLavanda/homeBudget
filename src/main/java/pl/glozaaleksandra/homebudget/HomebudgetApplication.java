@@ -67,8 +67,8 @@ public class HomebudgetApplication {
 
         productRepository.delete("theater");
 
-        List<Product> allProducts1 = productRepository.findAll();
-        System.out.println("All products: " + allProducts1);
+        allProducts = productRepository.findAll();
+        System.out.println("All products: " + allProducts);
 
 
     }
