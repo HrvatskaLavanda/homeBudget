@@ -18,11 +18,13 @@ public class ListBasedCategoryRepository implements CategoryRepository {
     }
 
     @Override
-    public void save(Category category) {
+    public Category save(Category category) {
         categories.add(category);
+        return category;
     }
 
-    public void delete(String categoryName) {
+    @Override
+    public boolean delete(String categoryName) {
         Category categoryToBeDeleted = findByName(categoryName);
         categories.remove(categoryToBeDeleted);
     }
@@ -35,7 +37,7 @@ public class ListBasedCategoryRepository implements CategoryRepository {
 
 
     @Override
-    public Category findByName(String categoryName) {
+    public Optional<Category> findByName(String categoryName) {
 //        for (Category category : categories) {
 //            if (category.getName().equals(categoryName)) {
 //                return category;
@@ -44,8 +46,8 @@ public class ListBasedCategoryRepository implements CategoryRepository {
 
         return categories.stream()
             .filter(category -> category.getName().equals(categoryName))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Category " + categoryName + " not found"));
+            .findFirst();
+//            .orElseThrow(() -> new IllegalArgumentException("Category " + categoryName + " not found"));
 
 //        if (categoryOptional.isEmpty()){
 //            throw new IllegalArgumentException("Category " + categoryName + " not found");
