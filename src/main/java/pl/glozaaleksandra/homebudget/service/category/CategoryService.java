@@ -9,17 +9,26 @@ import java.util.List;
 
 @Service
 public class CategoryService {
-  private CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
-  public CategoryService(@Autowired CategoryRepository categoryRepository) {
-    this.categoryRepository = categoryRepository; // wstrzykniecie -> = (injection)
-  }
+    public CategoryService(@Autowired CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository; // wstrzykniecie -> = (injection)
+    }
 
-  public CategoryRepository getCategoryRepository() {
-    return categoryRepository;
-  }
+    public List<Category> findAll() {
+        // zwracasz wszystkie z repo
+        return null;
+    }
 
-  public List<Category> findAll() {
-    return List.of();
-}
+    public Category findByName(String categoryName) {
+        return categoryRepository.findByName(categoryName)
+                .orElseThrow(() -> new IllegalArgumentException("Category " + categoryName + " not found"));
+    }
+
+    public Category saveNewCategory() {
+        // dodać kategorie do repo
+        // categoryRepository.save();
+        // zwrocic
+        return null;
+    }
 }

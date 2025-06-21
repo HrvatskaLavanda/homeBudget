@@ -2,6 +2,7 @@ package pl.glozaaleksandra.homebudget.repository.product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ListBasedProductRepository implements ProductRepository {
 
@@ -19,13 +20,17 @@ public class ListBasedProductRepository implements ProductRepository {
     }
 
     @Override
-    public Product findByName(String productName) {
-        for (Product product : products) {
-            if (productName.equals(product.getName())) {
-                return product;
-            }
-        }
-        throw new IllegalArgumentException("Product:  " + productName + " not found");
+    public Optional<Product> findByName(String productName) {
+//        for (Product product : products) {
+//            if (productName.equals(product.getName())) {
+//                return product;
+//            }
+//        }
+
+        return products.stream()
+                .filter(product -> productName.equals(product.getName()))
+                .findFirst();
+//        throw new IllegalArgumentException("Product:  " + productName + " not found");
     }
 
     @Override
@@ -36,7 +41,7 @@ public class ListBasedProductRepository implements ProductRepository {
 
     @Override
     public void delete(String productName) {
-        Product productToBeDeleted = findByName(productName);
+        Optional<Product> productToBeDeleted = findByName(productName);
         products.remove(productToBeDeleted);
     }
 }

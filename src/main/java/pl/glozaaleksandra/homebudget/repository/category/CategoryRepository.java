@@ -1,6 +1,7 @@
 package pl.glozaaleksandra.homebudget.repository.category;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategoryRepository {
     List<Category> findAll();
@@ -11,5 +12,5 @@ public interface CategoryRepository {
 
     void update(Category category, String newName);
 
-    Category findByName(String categoryName);
+    Optional<Category> findByName(String categoryName);
 }
