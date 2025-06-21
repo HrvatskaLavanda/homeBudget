@@ -4,6 +4,7 @@ import pl.glozaaleksandra.homebudget.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ListBasedExpenseRepository implements ExpenseRepository {
 
@@ -26,12 +27,17 @@ public class ListBasedExpenseRepository implements ExpenseRepository {
     }
 
     @Override
-    public Expense findByPerson(Person buyer) {
-        for (Expense expense : expenses) {
-            if (expense.getBuyer().equals(buyer)) {
-                return expense;
-            }
-        }
-        throw new IllegalArgumentException("Expense for:  " + buyer + " not found");
+    public Optional<Expense> findByPerson(Person buyer) {
+//        for (Expense expense : expenses) {
+//            if (expense.getBuyer().equals(buyer)) {
+//                return expense;
+//            }
+//        }
+
+        return expenses.stream()
+                .filter(expense -> expense.getBuyer().equals(buyer))
+                .findFirst();
+
+//        throw new IllegalArgumentException("Expense for:  " + buyer + " not found");
     }
 }

@@ -1,10 +1,10 @@
 package pl.glozaaleksandra.homebudget.repository.category;
 
-import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -25,7 +25,7 @@ public class ListBasedCategoryRepository implements CategoryRepository {
 
     @Override
     public boolean delete(String categoryName) {
-        Category categoryToBeDeleted = findByName(categoryName);
+        Optional<Category> categoryToBeDeleted = findByName(categoryName);
         categories.remove(categoryToBeDeleted);
     }
 
