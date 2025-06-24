@@ -33,8 +33,8 @@ public class ListBasedCategoryRepository implements CategoryRepository {
 
     @Override
     public void update(Category category, String newName) {
-        Category foundCategory = findByName(category.getName());
-        foundCategory.setName(newName);
+        Optional<Category> foundCategory = findByName(category.getName());
+        foundCategory.ifPresent(category1 -> category1.setName(newName));
     }
 
 
