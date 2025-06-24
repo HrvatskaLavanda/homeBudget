@@ -8,7 +8,7 @@ public interface CategoryRepository {
 
     void save(Category category);
 
-    void delete(String categoryName);
+    boolean delete(String categoryName);
 
     void update(Category category, String newName);
 
