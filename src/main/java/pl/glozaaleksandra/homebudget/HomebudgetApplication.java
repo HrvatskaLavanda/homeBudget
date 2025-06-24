@@ -10,6 +10,7 @@ import pl.glozaaleksandra.homebudget.repository.product.ProductRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class HomebudgetApplication {
@@ -38,7 +39,7 @@ public class HomebudgetApplication {
 
         categoryRepository.update(entertainmentCategory, "bread");
 
-        Category foundCategory = categoryRepository.findByName("bread");
+        Optional<Category> foundCategory = categoryRepository.findByName("bread");
 
         for (Category c : categories) {
             System.out.println(c.getName());
@@ -56,12 +57,12 @@ public class HomebudgetApplication {
         List<Product> allProducts = productRepository.findAll();
         System.out.println("All products: " + allProducts);
 
-        Product foundProduct = productRepository.findByName("cinema");
+        Optional<Product> foundProduct = productRepository.findByName("cinema");
         System.out.println("Found product: " + foundProduct);
 
         productRepository.update(cinema, "theater");
 
-        Product foundProduct1 = productRepository.findByName("theater");
+        Optional<Product> foundProduct1 = productRepository.findByName("theater");
         System.out.println("Found updated product: " + foundProduct1);
 
         productRepository.delete("theater");

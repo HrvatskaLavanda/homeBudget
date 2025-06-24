@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface CategoryRepository {
     List<Category> findAll();
 
-    void save(Category category);
+    Category save(Category category);
 
     boolean delete(String categoryName);
 
