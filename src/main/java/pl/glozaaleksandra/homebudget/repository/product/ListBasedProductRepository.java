@@ -35,8 +35,8 @@ public class ListBasedProductRepository implements ProductRepository {
 
     @Override
     public void update(Product product, String newProductName) {
-        Product foundProduct = findByName(product.getName());
-        foundProduct.setName(newProductName);
+        Optional<Product> foundProduct = findByName(product.getName());
+        foundProduct.ifPresent(product1 -> product1.setName(newProductName));
     }
 
     @Override
