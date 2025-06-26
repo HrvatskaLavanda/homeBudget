@@ -1,5 +1,6 @@
 package pl.glozaaleksandra.homebudget.service.category;
 
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.glozaaleksandra.homebudget.repository.category.Category;
@@ -17,7 +18,7 @@ public class CategoryService {
 
     public List<Category> findAll() {
         // zwracasz wszystkie z repo
-        return null;
+        return categoryRepository.findAll();
     }
 
     public Category findByName(String categoryName) {
@@ -29,6 +30,6 @@ public class CategoryService {
         // dodać kategorie do repo
         // categoryRepository.save();
         // zwrocic
-        return null;
+        return Category.builder().build();
     }
 }

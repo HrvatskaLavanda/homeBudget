@@ -12,5 +12,5 @@ public interface ProductRepository {
 
     void update(Product product, String newProductName);
 
-    void delete(String productName);
+    boolean delete(String productName);
 }

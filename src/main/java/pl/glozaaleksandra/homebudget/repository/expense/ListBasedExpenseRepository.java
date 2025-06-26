@@ -22,8 +22,9 @@ public class ListBasedExpenseRepository implements ExpenseRepository {
     }
 
     @Override
-    public void delete(Expense expense) {
+    public boolean delete(Expense expense) {
         expenses.remove(expense);
+        // todo HW return ??
     }
 
     @Override
@@ -37,7 +38,5 @@ public class ListBasedExpenseRepository implements ExpenseRepository {
         return expenses.stream()
                 .filter(expense -> expense.getBuyer().equals(buyer))
                 .findFirst();
-
-//        throw new IllegalArgumentException("Expense for:  " + buyer + " not found");
     }
 }

@@ -10,7 +10,7 @@ public interface ExpenseRepository {
 
     Expense save(Expense expense);
 
-    void delete(Expense expense);
+    boolean delete(Expense expense);
 
     Optional<Expense> findByPerson(Person buyer);
 }

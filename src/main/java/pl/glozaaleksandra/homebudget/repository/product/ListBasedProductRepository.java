@@ -40,8 +40,9 @@ public class ListBasedProductRepository implements ProductRepository {
     }
 
     @Override
-    public void delete(String productName) {
+    public boolean delete(String productName) {
         Optional<Product> productToBeDeleted = findByName(productName);
         products.remove(productToBeDeleted);
+        // todo HW return ??
     }
 }
