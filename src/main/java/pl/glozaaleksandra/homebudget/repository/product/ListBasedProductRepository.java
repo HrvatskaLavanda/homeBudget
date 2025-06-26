@@ -43,6 +43,8 @@ public class ListBasedProductRepository implements ProductRepository {
     public boolean delete(String productName) {
         Optional<Product> productToBeDeleted = findByName(productName);
         products.remove(productToBeDeleted);
-        // todo HW return ??
+        return productToBeDeleted
+                .map(foundProductName -> products.remove(foundProductName))
+                .orElse(false);
     }
 }
