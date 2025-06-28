@@ -23,11 +23,12 @@ public class ListBasedExpenseRepository implements ExpenseRepository {
 
     @Override
     public boolean delete(Expense expense) {
-        return expenses.stream()
-                .filter(foundExpense -> foundExpense.equals(expense))
-                .findFirst()
-                .map(foundExpense -> expenses.remove(foundExpense))
-                .orElse(false);
+        return expenses.remove(expense);
+//        return expenses.stream()
+//                .filter(foundExpense -> foundExpense.equals(expense))
+//                .findFirst()
+//                .map(foundExpense -> expenses.remove(foundExpense))
+//                .orElse(false);
     }
 
     @Override
