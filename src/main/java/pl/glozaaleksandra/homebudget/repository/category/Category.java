@@ -1,7 +1,9 @@
 package pl.glozaaleksandra.homebudget.repository.category;
 
 import java.util.Objects;
+import lombok.Builder;
 
+@Builder
 public class Category {
     private String name;
 

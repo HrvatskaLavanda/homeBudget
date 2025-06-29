@@ -1,15 +1,16 @@
 package pl.glozaaleksandra.homebudget.repository.product;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductRepository {
     List<Product> findAll();
 
     Product save(Product product);
 
-    Product findByName(String productName);
+    Optional<Product> findByName(String productName);
 
     void update(Product product, String newProductName);
 
-    void delete(String productName);
+    boolean delete(String productName);
 }

@@ -1,15 +1,16 @@
 package pl.glozaaleksandra.homebudget.repository.category;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategoryRepository {
     List<Category> findAll();
 
-    void save(Category category);
+    Category save(Category category);
 
-    void delete(String categoryName);
+    boolean delete(String categoryName);
 
     void update(Category category, String newName);
 
-    Category findByName(String categoryName);
+    Optional<Category> findByName(String categoryName);
 }
