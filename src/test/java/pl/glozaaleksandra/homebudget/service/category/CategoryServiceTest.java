@@ -1,0 +1,66 @@
+package pl.glozaaleksandra.homebudget.service.category;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.util.Assert;
+import pl.glozaaleksandra.homebudget.repository.category.Category;
+import pl.glozaaleksandra.homebudget.repository.category.CategoryRepository;
+
+class CategoryServiceTest {
+  @Mock
+  private CategoryRepository categoryRepository;
+  @Mock
+  private Category category;
+
+  private CategoryService categoryService;
+
+  @BeforeEach
+  void setUp() {
+    MockitoAnnotations.openMocks(this);
+    categoryService = new CategoryService(categoryRepository);
+  }
+
+  @Test
+  public void shouldAddNewCategory(){
+    // given
+    Category expected = Category.builder()
+        .name("Food")
+        .build();
+    when(categoryRepository.findByName(eq("Food"))).thenReturn(Optional.empty());
+
+    //when
+    Category newCategory = categoryService.saveNewCategory("Food");
+
+    //then
+    verify(categoryRepository).save(eq(expected));
+    Assertions.assertEquals(expected, newCategory);
+  }
+
+
+  @Test
+  public void shouldReturnAlreadyExistingCategory(){
+    // given
+    Category expected = Category.builder()
+        .name("Food")
+        .build();
+    when(categoryRepository.findByName(eq("Food"))).thenReturn(Optional.of(category));
+
+    //when
+    Category shouldBeTheSame = categoryService.saveNewCategory("Food");
+
+    //then
+    verify(categoryRepository, times(0)).save(eq(expected));
+    Assertions.assertEquals(category, shouldBeTheSame);
+  }
+
+}
