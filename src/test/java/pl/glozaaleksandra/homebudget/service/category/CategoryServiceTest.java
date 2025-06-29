@@ -31,7 +31,7 @@ class CategoryServiceTest {
   }
 
   @Test
-  public void shouldAddNewCategory(){
+  public void shouldAddNewCategory() {
     // given
     Category expected = Category.builder()
         .name("Food")
@@ -43,12 +43,13 @@ class CategoryServiceTest {
 
     //then
     verify(categoryRepository).save(eq(expected));
-    Assertions.assertEquals(expected, newCategory);
+    Assertions.assertEquals(expected, newCategory, "saved new category had different data than expected! "
+                                                   + "Did you save a new category with this exactly name?");
   }
 
 
   @Test
-  public void shouldReturnAlreadyExistingCategory(){
+  public void shouldReturnAlreadyExistingCategory() {
     // given
     Category expected = Category.builder()
         .name("Food")
@@ -60,7 +61,7 @@ class CategoryServiceTest {
 
     //then
     verify(categoryRepository, times(0)).save(eq(expected));
-    Assertions.assertEquals(category, shouldBeTheSame);
+    Assertions.assertEquals(category, shouldBeTheSame, "Existing category was not returned but a new one was returned.");
   }
 
 }
