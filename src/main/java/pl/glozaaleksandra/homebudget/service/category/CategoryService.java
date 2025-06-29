@@ -1,6 +1,5 @@
 package pl.glozaaleksandra.homebudget.service.category;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.glozaaleksandra.homebudget.repository.category.Category;
@@ -27,6 +26,9 @@ public class CategoryService {
     }
 
     public Category saveNewCategory(String food) {
+        return categoryRepository.findByName(food)
+                .orElse(categoryRepository.save(new Category(food)));
+
         // TODO - uzupełnij tą metodę w taki sposób aby:
         //  - jeśli kategoria o takiej nazwie już istneije - nie zapisuj nowej, tylko zwróć istniejącą
         //  - jeśli nie istnieje - stwórz
