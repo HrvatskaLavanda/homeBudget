@@ -29,6 +29,7 @@ public class CategoryService {
         return categoryRepository.findByName(food)
                 .orElse(categoryRepository.save(new Category(food)));
 
+
         // TODO - uzupełnij tą metodę w taki sposób aby:
         //  - jeśli kategoria o takiej nazwie już istneije - nie zapisuj nowej, tylko zwróć istniejącą
         //  - jeśli nie istnieje - stwórz
