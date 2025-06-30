@@ -6,6 +6,7 @@ import pl.glozaaleksandra.homebudget.repository.category.Category;
 import pl.glozaaleksandra.homebudget.repository.category.CategoryRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -26,14 +27,24 @@ public class CategoryService {
     }
 
     public Category saveNewCategory(String food) {
-        return categoryRepository.findByName(food)
-                .orElse(categoryRepository.save(new Category(food)));
+        //pusty Optional, lub niepusty Optional
+//        categoryRepository.findByName(food)
+//                .orElseGet(() -> categoryRepository.save(new Category(food))); //.orElse zawsze się wykona, dlatego nie poszedł test nr 2
 
-
-        // TODO - uzupełnij tą metodę w taki sposób aby:
-        //  - jeśli kategoria o takiej nazwie już istneije - nie zapisuj nowej, tylko zwróć istniejącą
-        //  - jeśli nie istnieje - stwórz
-        // Sprawdzisz, czy dobrze uzupełniłaś metodę odpalając testy. Link z instrukcją jak to zrobić znajdziesz
-        // na discordzie.
+        Optional<Category> possiblyFoundCategory = categoryRepository.findByName(food);
+        if (possiblyFoundCategory.isPresent()) {
+            return possiblyFoundCategory.get();
+        } else {
+            Category newCategory = categoryRepository.save(new Category(food));
+            return newCategory;
+        }
     }
+
+
+    // TODO - uzupełnij tą metodę w taki sposób aby:
+    //  - jeśli kategoria o takiej nazwie już istneije - nie zapisuj nowej, tylko zwróć istniejącą
+    //  - jeśli nie istnieje - stwórz
+    // Sprawdzisz, czy dobrze uzupełniłaś metodę odpalając testy. Link z instrukcją jak to zrobić znajdziesz
+    // na discordzie.
 }
+
