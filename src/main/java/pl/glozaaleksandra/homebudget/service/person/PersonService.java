@@ -13,12 +13,15 @@ public class PersonService {
     public boolean personExistsByName(String personName) {
         Optional<Person> possiblyFoundPerson = personRepository.getByName(personName);
         return possiblyFoundPerson.isPresent();
+        // TODO fill in this method
     }
 
     public Person saveNewPerson(String personName) {
         if (!personExistsByName(personName)) {
             Person newPerson = personRepository.addNewPerson(personName);
             return newPerson;
+        } else {
+            throw new IllegalArgumentException("Person " + personName + " exists");
         }
     }
 
