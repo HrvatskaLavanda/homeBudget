@@ -25,11 +25,8 @@ public class PersonService {
     }
 
     public Person getByName(String personName) {
-        Optional<Person> possiblyFoundPerson = personRepository.getByName(personName);
-        if (possiblyFoundPerson.isPresent()) {
-            return possiblyFoundPerson.get();
-        } else {
-            throw new IllegalStateException("Person " + personName + " exists");
-        }
+        return personRepository.getByName(personName)
+                .orElseThrow(() -> new IllegalStateException("Person " + personName + " exists"));
     }
 }
+
