@@ -6,19 +6,23 @@ import pl.glozaaleksandra.homebudget.repository.person.PersonRepository;
 
 @AllArgsConstructor
 public class PersonService {
-  private PersonRepository personRepository;
+    private PersonRepository personRepository;
 
-  public boolean personExistsByName(String personName) {
-   // TODO fill in this method
-  }
+    public boolean personExistsByName(String personName) {
+        if (personRepository.getByName(personName).equals(personName)) {
+            return true;
+        }
+        return false;
+        // TODO fill in this method
+    }
 
-  public Person saveNewPerson(String personName) {
-    // TODO fill in this method
+    public Person saveNewPerson(String personName) {
+        // TODO fill in this method
 
-  }
+    }
 
-  public Person getByName(String personName) {
-    // TODO fill in this method
+    public Person getByName(String personName) {
+        // TODO fill in this method
 
-  }
+    }
 }
