@@ -29,7 +29,7 @@ public class PersonService {
         if (possiblyFoundPerson.isPresent()) {
             return possiblyFoundPerson.get();
         } else {
-            throw new IllegalArgumentException("Person " + personName + " exists");
+            throw new IllegalStateException("Person " + personName + " exists");
         }
     }
 }
