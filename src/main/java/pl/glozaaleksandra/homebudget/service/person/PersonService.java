@@ -16,12 +16,8 @@ public class PersonService {
     }
 
     public Person saveNewPerson(String personName) {
-        if (!personExistsByName(personName)) {
-            Person newPerson = personRepository.addNewPerson(personName);
-            return newPerson;
-        } else {
-            throw new IllegalArgumentException("Person " + personName + " exists");
-        }
+        return personRepository.getByName(personName)
+                .orElseGet(() -> personRepository.addNewPerson(personName));
     }
 
     public Person getByName(String personName) {
