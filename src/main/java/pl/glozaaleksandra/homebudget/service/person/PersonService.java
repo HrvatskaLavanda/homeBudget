@@ -4,15 +4,15 @@ import lombok.AllArgsConstructor;
 import pl.glozaaleksandra.homebudget.Person;
 import pl.glozaaleksandra.homebudget.repository.person.PersonRepository;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 public class PersonService {
     private PersonRepository personRepository;
 
     public boolean personExistsByName(String personName) {
-        if (personRepository.getByName(personName).equals(personName)) {
-            return true;
-        }
-        return false;
+        Optional<Person> possiblyFoundPerson = personRepository.getByName(personName);
+        return possiblyFoundPerson.isPresent();
         // TODO fill in this method
     }
 
