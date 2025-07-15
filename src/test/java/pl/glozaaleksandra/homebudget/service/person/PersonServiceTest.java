@@ -16,6 +16,7 @@ import pl.glozaaleksandra.homebudget.repository.person.PersonRepository;
 class PersonServiceTest {
 
   public static final String ANY_PERSON_NAME = "anyName";
+  public static final String ANY_NAME = "Tomek";
   @Mock
   private PersonRepository personRepository;
   @Mock
@@ -31,15 +32,16 @@ class PersonServiceTest {
 
   @Test
   public void shouldAddNewPerson() {
-    // given
-    when(personRepository.addNewPerson(eq(ANY_PERSON_NAME))).thenReturn(person);
+    //given
+    when(personRepository.getByName(eq(ANY_NAME))).thenReturn(Optional.empty());
+    when(personRepository.addNewPerson(eq(ANY_NAME))).thenReturn(person);
+    when(person.getName()).thenReturn(ANY_NAME);
 
     //when
-    Person newPerson = personService.saveNewPerson(ANY_PERSON_NAME);
+    Person expected = personService.saveNewPerson(ANY_NAME);
 
     //then
-    verify(personRepository).addNewPerson(ANY_PERSON_NAME);
-    Assertions.assertEquals(person, newPerson, "saved new person had different data than expected!");
+    Assertions.assertEquals(ANY_NAME, expected.getName());
   }
 
 
