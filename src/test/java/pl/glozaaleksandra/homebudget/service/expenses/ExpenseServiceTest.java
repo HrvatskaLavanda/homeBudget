@@ -14,6 +14,7 @@ import pl.glozaaleksandra.homebudget.repository.expense.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.repository.product.Product;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Stream;
@@ -105,16 +106,19 @@ class ExpenseServiceTest {
     //  future or null?
 
 
-    private static Stream<Arguments> allNullExamples() {
+    private static Stream<Arguments> allNullEmptyFutureTimeExamples() {
         return Stream.of(
                 Arguments.of(null, people, Instant.now()),
                 Arguments.of("Basia", null, Instant.now()),
-                Arguments.of("Basia", people, null)
+                Arguments.of("Basia", people, null),
+                Arguments.of(" ", people, Instant.now()),
+                Arguments.of("Basia", people.isEmpty(), Instant.now()),
+                Arguments.of("Basia", people, Instant.now().plus(Duration.ofMinutes(5)))
         );
     }
 
     @ParameterizedTest
-    @MethodSource("allNullExamples")
+    @MethodSource("allNullEmptyFutureTimeExamples")
     public void shouldThrowExceptionWhenAnyExpenseParameterIsNull(String buyerName, List<Product> boughtProducts, Instant purchaseTime) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime));
     }
