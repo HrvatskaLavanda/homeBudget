@@ -112,7 +112,7 @@ class ExpenseServiceTest {
                 Arguments.of("Basia", null, Instant.now()),
                 Arguments.of("Basia", people, null),
                 Arguments.of(" ", people, Instant.now()),
-                Arguments.of("Basia", people.isEmpty(), Instant.now()),
+                Arguments.of("Basia", List.of(), Instant.now()),
                 Arguments.of("Basia", people, Instant.now().plus(Duration.ofMinutes(5)))
         );
     }
