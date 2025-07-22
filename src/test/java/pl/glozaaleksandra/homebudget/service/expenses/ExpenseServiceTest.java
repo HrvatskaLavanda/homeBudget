@@ -3,6 +3,9 @@ package pl.glozaaleksandra.homebudget.service.expenses;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import pl.glozaaleksandra.homebudget.Person;
@@ -13,6 +16,7 @@ import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -39,7 +43,7 @@ class ExpenseServiceTest {
     private Expense expense;
 
     @Mock
-    private List<Person> people;
+    private static List<Person> people;
 
     private ExpenseService expenseService;
 
@@ -71,8 +75,6 @@ class ExpenseServiceTest {
         Assertions.assertEquals(products, expected.getProducts());
     }
 
-    // todo 2nd test for else
-
     @Test
     public void shouldAddNewPersonWithExpenseIfNotOnTheList() {
         //given
@@ -101,4 +103,19 @@ class ExpenseServiceTest {
 
     // todo - tests for arguments (what if buyerName is null / empty? what if products null / empty? what if purchaseTime from
     //  future or null?
+
+
+    private static Stream<Arguments> allNullExamples() {
+        return Stream.of(
+                Arguments.of(null, people, Instant.now()),
+                Arguments.of("Basia", null, Instant.now()),
+                Arguments.of("Basia", people, null)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("allNullExamples")
+    public void shouldThrowExceptionWhenAnyExpenseParameterIsNull(String buyerName, List<Product> boughtProducts, Instant purchaseTime) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime));
+    }
 }
