@@ -58,7 +58,9 @@ class ExpenseServiceTest {
         when(personService.personExistsByName(eq(buyerName))).thenReturn(true);
         when(personService.getByName(eq(buyerName))).thenReturn(person);
         when(expenseRepository.save(any())).thenReturn(expense);
-        // todo - fill in when(expense....)
+        when(expense.getExpenseDatetime()).thenReturn(purchaseTime);
+        when(expense.getBuyer()).thenReturn(person);
+        when(expense.getProducts()).thenReturn(products);
 
         // when
         Expense expected = expenseService.addNewExpense(buyerName, products, purchaseTime);
@@ -75,20 +77,24 @@ class ExpenseServiceTest {
     public void shouldAddNewPersonWithExpenseIfNotOnTheList() {
         //given
         String buyerName = "Marek";
+        Person newPerson = new Person(buyerName);
         List<Product> products = List.of(product1, product2);
         Instant purchaseTime = Instant.now();
         when(personService.personExistsByName(eq(buyerName))).thenReturn(false);
         //jeżeli osoby nie ma to dodaj:
         when(personService.saveNewPerson(eq(buyerName))).thenReturn(new Person(buyerName));
-        when(personService.getByName(eq(buyerName))).thenReturn(person);
+        when(personService.getByName(eq(buyerName))).thenReturn(newPerson);
         when(expenseRepository.save(any())).thenReturn(expense);
+        when(expense.getExpenseDatetime()).thenReturn(purchaseTime);
+        when(expense.getBuyer()).thenReturn(newPerson);
+        when(expense.getProducts()).thenReturn(products);
 
         //when
         Expense expected = expenseService.addNewExpense(buyerName, products, purchaseTime);
 
         //then
         Assertions.assertEquals(purchaseTime, expected.getExpenseDatetime());
-        Assertions.assertEquals(person, expected.getBuyer());
+        Assertions.assertEquals(newPerson, expected.getBuyer());
         Assertions.assertEquals(products, expected.getProducts());
 
     }
