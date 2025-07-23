@@ -80,7 +80,7 @@ class ExpenseServiceTest {
     @Test
     public void shouldAddNewPersonWithExpenseIfNotOnTheList() {
         //given
-        String buyerName = "Marek";
+        String buyerName = PersonServiceTest.ANY_NAME;
         Person newPerson = new Person(buyerName);
         List<Product> products = List.of(product1, product2);
         Instant purchaseTime = Instant.now();
