@@ -55,12 +55,13 @@ class ExpenseServiceTest {
         expenseService = new ExpenseService(expenseRepository, personService);
     }
 
+    public static final Instant purchaseTime = Instant.now();
+    public static final String buyerName = PersonServiceTest.ANY_NAME;
+
     @Test
     public void shouldAddNewExpense() {
         // given
-        String buyerName = PersonServiceTest.ANY_NAME;
         List<Product> products = List.of(product1, product2);
-        Instant purchaseTime = Instant.now();
         when(personService.personExistsByName(eq(buyerName))).thenReturn(true);
         when(personService.getByName(eq(buyerName))).thenReturn(person);
         when(expenseRepository.save(any())).thenReturn(expense);
@@ -80,10 +81,8 @@ class ExpenseServiceTest {
     @Test
     public void shouldAddNewPersonWithExpenseIfNotOnTheList() {
         //given
-        String buyerName = PersonServiceTest.ANY_NAME;
         Person newPerson = new Person(buyerName);
         List<Product> products = List.of(product1, product2);
-        Instant purchaseTime = Instant.now();
         when(personService.personExistsByName(eq(buyerName))).thenReturn(false);
         //jeżeli osoby nie ma to dodaj:
         when(personService.saveNewPerson(eq(buyerName))).thenReturn(new Person(buyerName));
@@ -103,15 +102,13 @@ class ExpenseServiceTest {
 
     }
 
-    public static final Instant currentPurchaseTime = Instant.now();
-
     private static Stream<Arguments> allNullEmptyFutureTimeExamples() {
         return Stream.of(
-                Arguments.of(null, people, currentPurchaseTime),
-                Arguments.of(PersonServiceTest.ANY_NAME, null, currentPurchaseTime),
+                Arguments.of(null, people, purchaseTime),
+                Arguments.of(PersonServiceTest.ANY_NAME, null, purchaseTime),
                 Arguments.of(PersonServiceTest.ANY_NAME, people, null),
-                Arguments.of(" ", people, currentPurchaseTime),
-                Arguments.of(PersonServiceTest.ANY_NAME, List.of(), currentPurchaseTime),
+                Arguments.of(" ", people, purchaseTime),
+                Arguments.of(PersonServiceTest.ANY_NAME, List.of(), purchaseTime),
                 Arguments.of(PersonServiceTest.ANY_NAME, people, Instant.now().plus(Duration.ofMinutes(5)))
         );
     }
