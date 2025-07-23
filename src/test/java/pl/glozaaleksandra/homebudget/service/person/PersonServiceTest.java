@@ -1,10 +1,5 @@
 package pl.glozaaleksandra.homebudget.service.person;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +8,13 @@ import org.mockito.MockitoAnnotations;
 import pl.glozaaleksandra.homebudget.Person;
 import pl.glozaaleksandra.homebudget.repository.person.PersonRepository;
 
-class PersonServiceTest {
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+public class PersonServiceTest {
 
   public static final String ANY_PERSON_NAME = "anyName";
   public static final String ANY_NAME = "Tomek";

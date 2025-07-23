@@ -13,6 +13,7 @@ import pl.glozaaleksandra.homebudget.repository.expense.Expense;
 import pl.glozaaleksandra.homebudget.repository.expense.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.repository.product.Product;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
+import pl.glozaaleksandra.homebudget.service.person.PersonServiceTest;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -105,15 +106,14 @@ class ExpenseServiceTest {
     // todo - tests for arguments (what if buyerName is null / empty? what if products null / empty? what if purchaseTime from
     //  future or null?
 
-
     private static Stream<Arguments> allNullEmptyFutureTimeExamples() {
         return Stream.of(
                 Arguments.of(null, people, Instant.now()),
-                Arguments.of("Basia", null, Instant.now()),
-                Arguments.of("Basia", people, null),
+                Arguments.of(PersonServiceTest.ANY_NAME, null, Instant.now()),
+                Arguments.of(PersonServiceTest.ANY_NAME, people, null),
                 Arguments.of(" ", people, Instant.now()),
-                Arguments.of("Basia", List.of(), Instant.now()),
-                Arguments.of("Basia", people, Instant.now().plus(Duration.ofMinutes(5)))
+                Arguments.of(PersonServiceTest.ANY_NAME, List.of(), Instant.now()),
+                Arguments.of(PersonServiceTest.ANY_NAME, people, Instant.now().plus(Duration.ofMinutes(5)))
         );
     }
 
