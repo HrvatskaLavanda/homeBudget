@@ -58,7 +58,7 @@ class ExpenseServiceTest {
     @Test
     public void shouldAddNewExpense() {
         // given
-        String buyerName = "Tomek";
+        String buyerName = PersonServiceTest.ANY_NAME;
         List<Product> products = List.of(product1, product2);
         Instant purchaseTime = Instant.now();
         when(personService.personExistsByName(eq(buyerName))).thenReturn(true);
