@@ -103,16 +103,15 @@ class ExpenseServiceTest {
 
     }
 
-    // todo - tests for arguments (what if buyerName is null / empty? what if products null / empty? what if purchaseTime from
-    //  future or null?
+    public static final Instant currentPurchaseTime = Instant.now();
 
     private static Stream<Arguments> allNullEmptyFutureTimeExamples() {
         return Stream.of(
-                Arguments.of(null, people, Instant.now()),
-                Arguments.of(PersonServiceTest.ANY_NAME, null, Instant.now()),
+                Arguments.of(null, people, currentPurchaseTime),
+                Arguments.of(PersonServiceTest.ANY_NAME, null, currentPurchaseTime),
                 Arguments.of(PersonServiceTest.ANY_NAME, people, null),
-                Arguments.of(" ", people, Instant.now()),
-                Arguments.of(PersonServiceTest.ANY_NAME, List.of(), Instant.now()),
+                Arguments.of(" ", people, currentPurchaseTime),
+                Arguments.of(PersonServiceTest.ANY_NAME, List.of(), currentPurchaseTime),
                 Arguments.of(PersonServiceTest.ANY_NAME, people, Instant.now().plus(Duration.ofMinutes(5)))
         );
     }
