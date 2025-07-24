@@ -1,5 +1,6 @@
 package pl.glozaaleksandra.homebudget.service.expenses;
 
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import pl.glozaaleksandra.homebudget.Person;
 import pl.glozaaleksandra.homebudget.repository.expense.Expense;
@@ -34,5 +35,9 @@ public class ExpenseService {
                 .products(boughtProducts)
                 .build();
         return expenseRepository.save(expense);
+    }
+
+    public Optional<Expense> getExpenseByPurchaseDateTime(Instant purchaseTime) {
+
     }
 }
