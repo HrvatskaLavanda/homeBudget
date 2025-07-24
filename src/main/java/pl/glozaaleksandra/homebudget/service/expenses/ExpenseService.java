@@ -45,8 +45,6 @@ public class ExpenseService {
         for (Expense expense : expenses)
             if (purchaseTime.equals(expense.getExpenseDatetime())) {
                 return Optional.of(expense);
-            } else {
-                System.out.println("Not found");
             }
         return Optional.empty();
     }
