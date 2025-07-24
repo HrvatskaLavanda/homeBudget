@@ -1,6 +1,5 @@
 package pl.glozaaleksandra.homebudget.service.expenses;
 
-import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,11 +13,11 @@ import pl.glozaaleksandra.homebudget.repository.expense.Expense;
 import pl.glozaaleksandra.homebudget.repository.expense.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.repository.product.Product;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
-import pl.glozaaleksandra.homebudget.service.person.PersonServiceTest;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -47,6 +46,9 @@ class ExpenseServiceTest {
     private Expense expense;
 
     @Mock
+    private Expense expense2;
+
+    @Mock
     private static List<Person> people;
 
     private ExpenseService expenseService;
@@ -62,7 +64,9 @@ class ExpenseServiceTest {
     @Test
     public void shouldGetExpenseByDateTime() {
         // given
-
+        when(expenseRepository.findAll()).thenReturn(List.of(expense, expense2));
+        when(expense.getExpenseDatetime()).thenReturn(Instant.now().plus(Duration.ofMinutes(5)));
+        when(expense2.getExpenseDatetime()).thenReturn(PURCHASE_TIME);
 
         // when
         Optional<Expense> actual = expenseService.getExpenseByPurchaseDateTime(PURCHASE_TIME);
@@ -70,7 +74,7 @@ class ExpenseServiceTest {
         // then
         Assertions.assertNotNull(actual);
         Assertions.assertTrue(actual.isPresent());
-        Assertions.assertEquals(actual.get(), expense);
+        Assertions.assertEquals(actual.get(), expense2);
     }
 
     @Test

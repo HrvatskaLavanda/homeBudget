@@ -1,6 +1,5 @@
 package pl.glozaaleksandra.homebudget.service.expenses;
 
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import pl.glozaaleksandra.homebudget.Person;
 import pl.glozaaleksandra.homebudget.repository.expense.Expense;
@@ -10,6 +9,7 @@ import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 public class ExpenseService {
@@ -38,6 +38,16 @@ public class ExpenseService {
     }
 
     public Optional<Expense> getExpenseByPurchaseDateTime(Instant purchaseTime) {
-
+        if (purchaseTime == null) {
+            throw new IllegalArgumentException("No purchase time");
+        }
+        List<Expense> expenses = expenseRepository.findAll();
+        for (Expense expense : expenses)
+            if (purchaseTime.equals(expense.getExpenseDatetime())) {
+                return Optional.of(expense);
+            } else {
+                System.out.println("Not found");
+            }
+        return Optional.empty();
     }
 }
