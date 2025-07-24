@@ -78,6 +78,22 @@ class ExpenseServiceTest {
     }
 
     @Test
+    public void shouldNotGetExpenseByDateTime() {
+        //given
+        when(expenseRepository.findAll()).thenReturn(List.of(expense, expense2));
+        when(expense.getExpenseDatetime()).thenReturn(Instant.now().plus(Duration.ofMinutes(5)));
+        when(expense2.getExpenseDatetime()).thenReturn(Instant.now().plus(Duration.ofMinutes(15)));
+
+
+        //when
+        Optional<Expense> actual = expenseService.getExpenseByPurchaseDateTime(PURCHASE_TIME);
+
+        //then
+        Assertions.assertNotNull(actual);
+        Assertions.assertTrue(actual.isEmpty());
+    }
+
+    @Test
     public void shouldAddNewExpense() {
         // given
         List<Product> products = List.of(product1, product2);
