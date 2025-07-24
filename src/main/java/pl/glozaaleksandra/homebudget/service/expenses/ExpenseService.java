@@ -9,6 +9,7 @@ import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 public class ExpenseService {
@@ -34,5 +35,17 @@ public class ExpenseService {
                 .products(boughtProducts)
                 .build();
         return expenseRepository.save(expense);
+    }
+
+    public Optional<Expense> getExpenseByPurchaseDateTime(Instant purchaseTime) {
+        if (purchaseTime == null) {
+            throw new IllegalArgumentException("No purchase time");
+        }
+        List<Expense> expenses = expenseRepository.findAll();
+        for (Expense expense : expenses)
+            if (purchaseTime.equals(expense.getExpenseDatetime())) {
+                return Optional.of(expense);
+            }
+        return Optional.empty();
     }
 }
