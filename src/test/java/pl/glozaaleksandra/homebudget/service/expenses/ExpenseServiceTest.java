@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import pl.glozaaleksandra.homebudget.Person;
@@ -152,5 +153,11 @@ class ExpenseServiceTest {
     @MethodSource("allNullEmptyFutureTimeExamples")
     public void shouldThrowExceptionWhenAnyExpenseParameterIsNull(String buyerName, List<Product> boughtProducts, Instant purchaseTime) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    public void shouldThrowExceptionWhenPurchaseTimeIsNull(Instant purchaseTime) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> expenseService.getExpenseByPurchaseDateTime(purchaseTime));
     }
 }
