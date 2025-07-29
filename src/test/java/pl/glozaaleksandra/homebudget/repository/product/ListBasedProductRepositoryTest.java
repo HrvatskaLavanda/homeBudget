@@ -62,5 +62,17 @@ class ListBasedProductRepositoryTest {
 
     }
 
+    @Test
+    public void shouldUpdateProduct() {
+        //given
+        repository.save(PRODUCT);
+        String newProductName = "banana";
 
+        //when
+        repository.update(PRODUCT, newProductName);
+
+        //then
+        Assertions.assertEquals(newProductName, PRODUCT.getName());
+
+    }
 }
