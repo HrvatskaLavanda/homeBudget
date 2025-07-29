@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.Mockito.when;
+
 class ListBasedProductRepositoryTest {
 
     @Mock
@@ -73,6 +75,22 @@ class ListBasedProductRepositoryTest {
 
         //then
         Assertions.assertEquals(newProductName, PRODUCT.getName());
+
+    }
+
+    @Test
+    public void shouldDeleteProduct() {
+        //given
+        repository.save(PRODUCT);
+        String productName = PRODUCT.getName();
+        when(repository.findByName(productName)).thenReturn(Optional.of(PRODUCT));
+
+        //when
+        repository.delete(productName);
+
+        //then
+        Optional<Product> productToBeDeleted = repository.findByName(productName);
+        Assertions.assertTrue(productToBeDeleted.isEmpty());
 
     }
 }
