@@ -1,6 +1,7 @@
 package pl.glozaaleksandra.homebudget.repository.product;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import pl.glozaaleksandra.homebudget.repository.category.Category;
@@ -8,23 +9,30 @@ import pl.glozaaleksandra.homebudget.repository.category.Category;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 class ListBasedProductRepositoryTest {
+
     @Mock
-    ListBasedProductRepository repository = new ListBasedProductRepository();
+    private ListBasedProductRepository repository;
+
+    @BeforeEach
+    public void setUp() {
+        repository = new ListBasedProductRepository();
+    }
+
+    private static final Category FRUITS_CATEGORY = new Category("Fruits");
+    private static final Product PRODUCT = new Product(BigDecimal.valueOf(100), "apple", FRUITS_CATEGORY);
 
     @Test
     public void shouldAddNewProduct() {
         //given
 
-        Category fruitsCategory = new Category("Fruits");
-        Product expectedProduct = new Product(BigDecimal.valueOf(100), "apple", fruitsCategory);
-
         //when
-        Product actualProduct = repository.save(expectedProduct);
+        Product actualProduct = repository.save(PRODUCT);
 
         //then
-        Assertions.assertEquals(actualProduct, expectedProduct);
+        Assertions.assertEquals(actualProduct, PRODUCT);
     }
 
     @Test
@@ -37,6 +45,20 @@ class ListBasedProductRepositoryTest {
 
         //then
         Assertions.assertEquals(actualAllProducts, expectedAllProducts);
+
+    }
+
+    @Test
+    public void shouldFindProductByName() {
+        //given
+        repository.save(PRODUCT);
+        String productName = PRODUCT.getName();
+        //when
+        Optional<Product> actualFoundProduct = repository.findByName(productName);
+
+        //then
+        Assertions.assertNotNull(actualFoundProduct);
+        Assertions.assertTrue(actualFoundProduct.isPresent());
 
     }
 
