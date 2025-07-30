@@ -1,9 +1,7 @@
 package pl.glozaaleksandra.homebudget.repository.product;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import pl.glozaaleksandra.homebudget.repository.category.Category;
 
 import java.math.BigDecimal;
@@ -11,17 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.when;
-
 class ListBasedProductRepositoryTest {
 
-    @Mock
-    private ListBasedProductRepository repository;
-
-    @BeforeEach
-    public void setUp() {
-        repository = new ListBasedProductRepository();
-    }
+    private ListBasedProductRepository repository = new ListBasedProductRepository();
 
     private static final Category FRUITS_CATEGORY = new Category("Fruits");
     private static final Product PRODUCT = new Product(BigDecimal.valueOf(100), "apple", FRUITS_CATEGORY);
@@ -83,7 +73,6 @@ class ListBasedProductRepositoryTest {
         //given
         repository.save(PRODUCT);
         String productName = PRODUCT.getName();
-        when(repository.findByName(productName)).thenReturn(Optional.of(PRODUCT));
 
         //when
         repository.delete(productName);
