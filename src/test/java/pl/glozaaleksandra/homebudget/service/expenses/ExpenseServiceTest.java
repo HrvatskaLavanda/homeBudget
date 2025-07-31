@@ -49,8 +49,7 @@ class ExpenseServiceTest {
     @Mock
     private Expense expense2;
 
-    @Mock
-    private static List<Person> people;
+    private List<Person> people;
 
     private ExpenseService expenseService;
 
@@ -140,12 +139,12 @@ class ExpenseServiceTest {
 
     private static Stream<Arguments> allNullEmptyFutureTimeExamples() {
         return Stream.of(
-                Arguments.of(null, people, PURCHASE_TIME),
+                Arguments.of(null, List.of(), PURCHASE_TIME),
                 Arguments.of(ANY_NAME, null, PURCHASE_TIME),
-                Arguments.of(ANY_NAME, people, null),
-                Arguments.of(" ", people, PURCHASE_TIME),
+                Arguments.of(ANY_NAME, List.of(), null),
+                Arguments.of(" ", List.of(), PURCHASE_TIME),
                 Arguments.of(ANY_NAME, List.of(), PURCHASE_TIME),
-                Arguments.of(ANY_NAME, people, Instant.now().plus(Duration.ofMinutes(5)))
+                Arguments.of(ANY_NAME, List.of(), Instant.now().plus(Duration.ofMinutes(5)))
         );
     }
 
