@@ -1,50 +1,48 @@
-CREATE TABLE public.category (
-	category_id serial4 NOT NULL,
-	category_name varchar(120) NOT NULL,
-	CONSTRAINT category_pkey PRIMARY KEY (category_id)
+create table category (
+category_id serial not null,
+category_name varchar(120),
+primary key (category_id)
 );
 
-CREATE TABLE public.bought_products (
-	bought_product_id serial4 NOT NULL,
-	product_price numeric(10, 2) NOT NULL,
-	quantity serial4 NOT NULL,
-	product_id serial4 NOT NULL,
-	expense_id serial4 NOT NULL,
-	market_id serial4 NOT NULL,
-	CONSTRAINT bought_products_pkey PRIMARY KEY (bought_product_id),
-	CONSTRAINT bought_products_expense_id_fkey FOREIGN KEY (expense_id) REFERENCES public.expense(expense_id),
-	CONSTRAINT bought_products_market_id_fkey FOREIGN KEY (market_id) REFERENCES public.markets(market_id),
-	CONSTRAINT bought_products_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.product(product_id)
+create table product (
+product_id serial not null,
+product_name varchar(120),
+category_id integer not null,
+primary key(product_id),
+foreign key(category_id) references category(category_id)
 );
 
-CREATE TABLE public.expense (
-	expense_id serial4 NOT NULL,
-	person_id serial4 NOT NULL,
-	total_price numeric(10, 2) NOT NULL,
-	expense_date_time date NOT NULL,
-	CONSTRAINT expense_pkey PRIMARY KEY (expense_id),
-	CONSTRAINT expense_person_id_fkey FOREIGN KEY (person_id) REFERENCES public.person(person_id)
+create table markets (
+market_id serial not null,
+market_name varchar(120),
+primary key(market_id)
 );
 
-CREATE TABLE public.markets (
-	market_id serial4 NOT NULL,
-	market_name varchar(120) NOT NULL,
-	CONSTRAINT markets_pkey PRIMARY KEY (market_id)
+create table person(
+person_id serial not null,
+person_name varchar(120),
+primary key(person_id)
 );
 
-CREATE TABLE public.person (
-	person_id serial4 NOT NULL,
-	person_name varchar(120) NOT NULL,
-	CONSTRAINT person_pkey PRIMARY KEY (person_id)
+create table expense(
+expense_id serial not null,
+person_id integer not null,
+total_price decimal(10, 2) not null,
+expense_date_time date not null,
+primary key(expense_id),
+foreign key(person_id) references person(person_id)
 );
 
-CREATE TABLE public.product (
-	product_id serial4 NOT NULL,
-	product_name varchar(120) NOT NULL,
-	category_id serial4 NOT NULL,
-	CONSTRAINT product_pkey PRIMARY KEY (product_id),
-	CONSTRAINT product_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.category(category_id)
+create table bought_products (
+bought_product_id serial not null,
+product_price decimal(10, 2) not null,
+quantity integer not null,
+product_id integer not null,
+expense_id integer not null,
+market_id integer not null,
+primary key (bought_product_id),
+foreign key (product_id) references product(product_id),
+foreign key (expense_id) references expense(expense_id),
+foreign key (market_id) references markets(market_id)
 );
-
-
 
