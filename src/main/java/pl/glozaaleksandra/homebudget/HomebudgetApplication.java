@@ -23,6 +23,10 @@ public class HomebudgetApplication {
         List<Category> categories = categoryRepository.findAll();
         System.out.println(categories);
 
+        ProductRepository productRepository = context.getBean(ProductRepository.class);
+        List<Product> products = productRepository.findAll();
+        System.out.println(products);
+
     }
 
     private static void version1() {
