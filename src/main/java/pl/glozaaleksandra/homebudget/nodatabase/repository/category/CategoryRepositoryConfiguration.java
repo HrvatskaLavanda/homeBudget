@@ -1,4 +1,4 @@
-package pl.glozaaleksandra.homebudget.repository.category;
+package pl.glozaaleksandra.homebudget.nodatabase.repository.category;
 
 import org.springframework.context.annotation.Configuration;
 

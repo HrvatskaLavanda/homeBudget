@@ -1,4 +1,6 @@
-package pl.glozaaleksandra.homebudget.repository.category;
+package pl.glozaaleksandra.homebudget.nodatabase.repository.category;
+
+import pl.glozaaleksandra.homebudget.model.Category;
 
 import java.util.List;
 import java.util.Optional;

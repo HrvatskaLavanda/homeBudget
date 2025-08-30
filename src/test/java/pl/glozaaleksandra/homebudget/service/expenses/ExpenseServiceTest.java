@@ -9,10 +9,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import pl.glozaaleksandra.homebudget.Person;
-import pl.glozaaleksandra.homebudget.repository.expense.Expense;
-import pl.glozaaleksandra.homebudget.repository.expense.ExpenseRepository;
-import pl.glozaaleksandra.homebudget.repository.product.Product;
+import pl.glozaaleksandra.homebudget.model.Expense;
+import pl.glozaaleksandra.homebudget.model.Person;
+import pl.glozaaleksandra.homebudget.model.Product;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.expense.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
 import java.time.Duration;

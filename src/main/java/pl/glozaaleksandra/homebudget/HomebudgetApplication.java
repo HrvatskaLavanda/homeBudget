@@ -1,12 +1,14 @@
 package pl.glozaaleksandra.homebudget;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.glozaaleksandra.homebudget.repository.category.Category;
-import pl.glozaaleksandra.homebudget.repository.category.CategoryRepository;
-import pl.glozaaleksandra.homebudget.repository.category.ListBasedCategoryRepository;
-import pl.glozaaleksandra.homebudget.repository.product.ListBasedProductRepository;
-import pl.glozaaleksandra.homebudget.repository.product.Product;
-import pl.glozaaleksandra.homebudget.repository.product.ProductRepository;
+import org.springframework.context.ConfigurableApplicationContext;
+import pl.glozaaleksandra.homebudget.model.Category;
+import pl.glozaaleksandra.homebudget.model.Product;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.category.CategoryRepository;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.category.ListBasedCategoryRepository;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.product.ListBasedProductRepository;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.product.ProductRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,6 +18,14 @@ import java.util.Optional;
 public class HomebudgetApplication {
 
     public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(HomebudgetApplication.class);
+        CategoryRepository categoryRepository = context.getBean(CategoryRepository.class);
+        List<Category> categories = categoryRepository.findAll();
+        System.out.println(categories);
+
+    }
+
+    private static void version1() {
         CategoryRepository categoryRepository = new ListBasedCategoryRepository();
         ProductRepository productRepository = new ListBasedProductRepository();
 

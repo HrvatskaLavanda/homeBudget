@@ -1,8 +1,8 @@
 package pl.glozaaleksandra.homebudget.service.person;
 
 import lombok.AllArgsConstructor;
-import pl.glozaaleksandra.homebudget.Person;
-import pl.glozaaleksandra.homebudget.repository.person.PersonRepository;
+import pl.glozaaleksandra.homebudget.model.Person;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.person.PersonRepository;
 
 import java.util.Optional;
 

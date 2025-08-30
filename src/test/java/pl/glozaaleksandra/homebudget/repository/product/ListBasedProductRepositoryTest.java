@@ -2,7 +2,9 @@ package pl.glozaaleksandra.homebudget.repository.product;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pl.glozaaleksandra.homebudget.repository.category.Category;
+import pl.glozaaleksandra.homebudget.model.Category;
+import pl.glozaaleksandra.homebudget.model.Product;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.product.ListBasedProductRepository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

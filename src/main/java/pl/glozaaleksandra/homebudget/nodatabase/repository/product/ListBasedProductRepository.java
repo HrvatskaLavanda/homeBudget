@@ -1,4 +1,6 @@
-package pl.glozaaleksandra.homebudget.repository.product;
+package pl.glozaaleksandra.homebudget.nodatabase.repository.product;
+
+import pl.glozaaleksandra.homebudget.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
