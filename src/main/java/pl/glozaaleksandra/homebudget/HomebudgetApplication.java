@@ -3,14 +3,8 @@ package pl.glozaaleksandra.homebudget;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import pl.glozaaleksandra.homebudget.entities.CategoryEntity;
-import pl.glozaaleksandra.homebudget.entities.MarketEntity;
-import pl.glozaaleksandra.homebudget.entities.PersonEntity;
-import pl.glozaaleksandra.homebudget.entities.ProductEntity;
-import pl.glozaaleksandra.homebudget.repository.CategoryRepository;
-import pl.glozaaleksandra.homebudget.repository.MarketRepository;
-import pl.glozaaleksandra.homebudget.repository.PersonRepository;
-import pl.glozaaleksandra.homebudget.repository.ProductRepository;
+import pl.glozaaleksandra.homebudget.entities.*;
+import pl.glozaaleksandra.homebudget.repository.*;
 
 import java.util.List;
 
@@ -34,6 +28,10 @@ public class HomebudgetApplication {
         PersonRepository personRepository = context.getBean(PersonRepository.class);
         List<PersonEntity> people = personRepository.findAll();
         System.out.println(people);
+
+        ExpenseRepository expenseRepository = context.getBean(ExpenseRepository.class);
+        List<ExpenseEntity> expenses = expenseRepository.findAll();
+        System.out.println(expenses);
 
 
     }
