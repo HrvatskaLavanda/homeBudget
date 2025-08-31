@@ -4,8 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import pl.glozaaleksandra.homebudget.entities.CategoryEntity;
+import pl.glozaaleksandra.homebudget.entities.MarketEntity;
 import pl.glozaaleksandra.homebudget.entities.ProductEntity;
 import pl.glozaaleksandra.homebudget.repository.CategoryRepository;
+import pl.glozaaleksandra.homebudget.repository.MarketRepository;
 import pl.glozaaleksandra.homebudget.repository.ProductRepository;
 
 import java.util.List;
@@ -22,6 +24,11 @@ public class HomebudgetApplication {
         ProductRepository productRepository = context.getBean(ProductRepository.class);
         List<ProductEntity> products = productRepository.findAll();
         System.out.println(products);
+
+        MarketRepository marketRepository = context.getBean(MarketRepository.class);
+        List<MarketEntity> markets = marketRepository.findAll();
+        System.out.println(markets);
+
 
     }
 
