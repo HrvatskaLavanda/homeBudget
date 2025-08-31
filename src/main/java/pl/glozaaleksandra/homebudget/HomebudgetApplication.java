@@ -33,6 +33,10 @@ public class HomebudgetApplication {
         List<ExpenseEntity> expenses = expenseRepository.findAll();
         System.out.println(expenses);
 
+        BoughtProductsRepository boughtProductsRepository = context.getBean(BoughtProductsRepository.class);
+        List<BoughtProductsEntity> boughtProducts = boughtProductsRepository.findAll();
+        System.out.println(boughtProducts);
+
 
     }
 
