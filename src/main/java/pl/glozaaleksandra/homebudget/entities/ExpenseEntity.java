@@ -30,10 +30,6 @@ public class ExpenseEntity {
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     private PersonEntity personEntity;
 
-    @OneToOne
-    @JoinColumn(name = "expense_id", referencedColumnName = "expense_id")
-    private BoughtProductsEntity boughtProductsEntity;
-
     @Override
     public String toString() {
         return "ExpenseEntity{" +
