@@ -23,4 +23,12 @@ public class CategoryEntity {
 
     @Column(name = "category_name")
     private String categoryName;
+
+    @Override
+    public String toString() {
+        return "CategoryEntity{" +
+                "categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                '}';
+    }
 }
