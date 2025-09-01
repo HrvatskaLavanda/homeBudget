@@ -1,9 +1,6 @@
 package pl.glozaaleksandra.homebudget.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +25,14 @@ public class ExpenseEntity {
 
     @Column(name = "expense_date_time")
     private Instant expenseDateTime;
+
+    @OneToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    private PersonEntity personEntity;
+
+    @OneToOne
+    @JoinColumn(name = "expense_id", referencedColumnName = "expense_id")
+    private BoughtProductsEntity boughtProductsEntity;
 
     @Override
     public String toString() {
