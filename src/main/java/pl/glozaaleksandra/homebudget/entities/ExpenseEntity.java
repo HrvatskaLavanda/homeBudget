@@ -28,4 +28,13 @@ public class ExpenseEntity {
 
     @Column(name = "expense_date_time")
     private Instant expenseDateTime;
+
+    @Override
+    public String toString() {
+        return "ExpenseEntity{" +
+                "expenseId=" + expenseId +
+                ", totalPrice=" + totalPrice +
+                ", expenseDateTime=" + expenseDateTime +
+                '}';
+    }
 }

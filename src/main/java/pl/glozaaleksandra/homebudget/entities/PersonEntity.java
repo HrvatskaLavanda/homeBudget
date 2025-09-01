@@ -22,4 +22,12 @@ public class PersonEntity {
 
     @Column(name = "person_name")
     private String personName;
+
+    @Override
+    public String toString() {
+        return "PersonEntity{" +
+                "personId=" + personId +
+                ", personName='" + personName + '\'' +
+                '}';
+    }
 }
