@@ -1,10 +1,10 @@
 package pl.glozaaleksandra.homebudget.service.expenses;
 
 import lombok.AllArgsConstructor;
-import pl.glozaaleksandra.homebudget.Person;
-import pl.glozaaleksandra.homebudget.repository.expense.Expense;
-import pl.glozaaleksandra.homebudget.repository.expense.ExpenseRepository;
-import pl.glozaaleksandra.homebudget.repository.product.Product;
+import pl.glozaaleksandra.homebudget.model.Expense;
+import pl.glozaaleksandra.homebudget.model.Person;
+import pl.glozaaleksandra.homebudget.model.Product;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.expense.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
 import java.time.Instant;

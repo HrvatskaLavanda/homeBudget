@@ -1,11 +1,9 @@
-package pl.glozaaleksandra.homebudget.repository.expense;
+package pl.glozaaleksandra.homebudget.model;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import pl.glozaaleksandra.homebudget.Person;
-import pl.glozaaleksandra.homebudget.repository.product.Product;
 
 import java.math.BigDecimal;
 import java.time.Instant;

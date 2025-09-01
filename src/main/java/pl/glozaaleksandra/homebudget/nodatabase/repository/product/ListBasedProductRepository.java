@@ -1,9 +1,13 @@
-package pl.glozaaleksandra.homebudget.repository.product;
+package pl.glozaaleksandra.homebudget.nodatabase.repository.product;
+
+import org.springframework.stereotype.Repository;
+import pl.glozaaleksandra.homebudget.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class ListBasedProductRepository implements ProductRepository {
 
     private List<Product> products = new ArrayList<>();

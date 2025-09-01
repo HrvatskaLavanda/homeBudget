@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import pl.glozaaleksandra.homebudget.Person;
-import pl.glozaaleksandra.homebudget.repository.person.PersonRepository;
+import pl.glozaaleksandra.homebudget.model.Person;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.person.PersonRepository;
 
 import java.util.Optional;
 

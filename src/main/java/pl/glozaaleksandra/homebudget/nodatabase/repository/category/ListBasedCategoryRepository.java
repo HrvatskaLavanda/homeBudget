@@ -1,6 +1,7 @@
-package pl.glozaaleksandra.homebudget.repository.category;
+package pl.glozaaleksandra.homebudget.nodatabase.repository.category;
 
 import org.springframework.stereotype.Repository;
+import pl.glozaaleksandra.homebudget.model.Category;
 
 import java.util.ArrayList;
 import java.util.List;

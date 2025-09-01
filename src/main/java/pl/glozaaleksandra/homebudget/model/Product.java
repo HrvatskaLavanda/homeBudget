@@ -1,7 +1,6 @@
-package pl.glozaaleksandra.homebudget.repository.product;
+package pl.glozaaleksandra.homebudget.model;
 
 import lombok.*;
-import pl.glozaaleksandra.homebudget.repository.category.Category;
 
 import java.math.BigDecimal;
 

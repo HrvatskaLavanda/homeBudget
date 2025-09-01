@@ -1,13 +1,14 @@
-package pl.glozaaleksandra.homebudget.repository.person;
+package pl.glozaaleksandra.homebudget.nodatabase.repository.person;
+
+import org.springframework.stereotype.Repository;
+import pl.glozaaleksandra.homebudget.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.stereotype.Repository;
-import pl.glozaaleksandra.homebudget.Person;
 
 @Repository
-public class ListBasedPersonRepository implements PersonRepository{
+public class ListBasedPersonRepository implements PersonRepository {
   private List<Person> persons = new ArrayList<>();
 
   @Override

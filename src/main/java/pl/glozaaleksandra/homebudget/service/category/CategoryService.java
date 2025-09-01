@@ -2,8 +2,8 @@ package pl.glozaaleksandra.homebudget.service.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.glozaaleksandra.homebudget.repository.category.Category;
-import pl.glozaaleksandra.homebudget.repository.category.CategoryRepository;
+import pl.glozaaleksandra.homebudget.model.Category;
+import pl.glozaaleksandra.homebudget.nodatabase.repository.category.CategoryRepository;
 
 import java.util.List;
 import java.util.Optional;
