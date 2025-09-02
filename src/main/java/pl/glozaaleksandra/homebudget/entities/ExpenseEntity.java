@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,6 +30,9 @@ public class ExpenseEntity {
     @OneToOne
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     private PersonEntity personEntity;
+
+    @OneToMany(mappedBy = "expense")
+    private List<BoughtProductsEntity> boughtProducts;
 
     @Override
     public String toString() {
