@@ -27,4 +27,13 @@ public class BoughtProductsEntity {
 
     @Column(name = "quantity")
     private int quantity;
+
+    @Override
+    public String toString() {
+        return "BoughtProductsEntity{" +
+                "boughtProductId=" + boughtProductId +
+                ", productPrice=" + productPrice +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

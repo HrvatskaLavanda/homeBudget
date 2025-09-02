@@ -22,4 +22,12 @@ public class MarketEntity {
 
     @Column(name = "market_name")
     private String marketName;
+
+    @Override
+    public String toString() {
+        return "MarketEntity{" +
+                "marketId=" + marketId +
+                ", marketName='" + marketName + '\'' +
+                '}';
+    }
 }
