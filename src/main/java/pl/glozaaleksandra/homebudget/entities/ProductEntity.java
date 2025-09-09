@@ -26,7 +26,7 @@ public class ProductEntity {
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private CategoryEntity product;
+    private CategoryEntity category;
 
     @Override
     public String toString() {
