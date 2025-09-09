@@ -29,6 +29,10 @@ public class BoughtProductsEntity {
     @JoinColumn(name = "expense_id", referencedColumnName = "expense_id")
     private ExpenseEntity expense;
 
+    @ManyToOne
+    @JoinColumn(name = "market_id", referencedColumnName = "market_id")
+    private MarketEntity market;
+
     @Override
     public String toString() {
         return "BoughtProductsEntity{" +

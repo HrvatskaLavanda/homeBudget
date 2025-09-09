@@ -23,7 +23,7 @@ public class CategoryEntity {
     @Column(name = "category_name")
     private String categoryName;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "category")
     private List<ProductEntity> products;
 
     @Override
