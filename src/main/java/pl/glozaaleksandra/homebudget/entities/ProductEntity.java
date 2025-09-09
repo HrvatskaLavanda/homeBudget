@@ -28,6 +28,9 @@ public class ProductEntity {
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private CategoryEntity category;
 
+    @OneToMany(mappedBy = "product")
+    private BoughtProductsEntity boughtProducts;
+
     @Override
     public String toString() {
         return "ProductEntity{" +
