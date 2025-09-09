@@ -1,13 +1,12 @@
 package pl.glozaaleksandra.homebudget.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +21,9 @@ public class PersonEntity {
 
     @Column(name = "person_name")
     private String personName;
+
+    @OneToMany(mappedBy = "person")
+    private List<ExpenseEntity> expenses;
 
     @Override
     public String toString() {

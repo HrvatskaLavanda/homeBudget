@@ -34,6 +34,10 @@ public class ExpenseEntity {
     @OneToMany(mappedBy = "expense")
     private List<BoughtProductsEntity> boughtProducts;
 
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    private PersonEntity person;
+
     @Override
     public String toString() {
         return "ExpenseEntity{" +
