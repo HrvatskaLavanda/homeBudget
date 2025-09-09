@@ -24,6 +24,10 @@ public class ProductEntity {
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private CategoryEntity categoryEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private CategoryEntity product;
+
     @Override
     public String toString() {
         return "ProductEntity{" +
