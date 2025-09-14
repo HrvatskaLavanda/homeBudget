@@ -1,15 +1,13 @@
 package pl.glozaaleksandra.homebudget.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor

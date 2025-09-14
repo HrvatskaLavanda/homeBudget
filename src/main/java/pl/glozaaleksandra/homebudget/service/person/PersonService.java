@@ -1,8 +1,8 @@
 package pl.glozaaleksandra.homebudget.service.person;
 
 import lombok.AllArgsConstructor;
-import pl.glozaaleksandra.homebudget.model.Person;
-import pl.glozaaleksandra.homebudget.nodatabase.repository.person.PersonRepository;
+import pl.glozaaleksandra.homebudget.entities.PersonEntity;
+import pl.glozaaleksandra.homebudget.repository.PersonRepository;
 
 import java.util.Optional;
 
@@ -11,17 +11,22 @@ public class PersonService {
     private PersonRepository personRepository;
 
     public boolean personExistsByName(String personName) {
-        Optional<Person> possiblyFoundPerson = personRepository.getByName(personName);
+        Optional<PersonEntity> possiblyFoundPerson = personRepository.findByName(personName);
         return possiblyFoundPerson.isPresent();
     }
 
-    public Person saveNewPerson(String personName) {
-        return personRepository.getByName(personName)
-                .orElseGet(() -> personRepository.addNewPerson(personName));
+    public PersonEntity saveNewPerson(String personName) {
+        return personRepository.findByName(personName)
+                .orElseGet(() -> {
+                    PersonEntity person = PersonEntity.builder()
+                            .personName(personName)
+                            .build();
+                    return personRepository.save(person);
+                });
     }
 
-    public Person getByName(String personName) {
-        return personRepository.getByName(personName)
+    public PersonEntity getByName(String personName) {
+        return personRepository.findByName(personName)
                 .orElseThrow(() -> new IllegalStateException("Person " + personName + " exists"));
     }
 }
