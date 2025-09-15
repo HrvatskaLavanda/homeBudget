@@ -22,10 +22,6 @@ public class ProductEntity {
     @Column(name = "product_name")
     private String productName;
 
-//    @OneToOne
-//    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-//    private CategoryEntity categoryEntity;
-
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private CategoryEntity category;

@@ -25,10 +25,6 @@ public class ExpenseEntity {
     @Column(name = "expense_date_time")
     private Instant expenseDateTime;
 
-//    @OneToOne
-//    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
-//    private PersonEntity personEntity;
-
     @OneToMany(mappedBy = "expense")
     private List<BoughtProductsEntity> boughtProducts;
 

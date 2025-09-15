@@ -27,6 +27,11 @@ public class PersonService {
                 });
     }
 
+    public PersonEntity getById(int personId) {
+        return personRepository.findByPersonId(personId)
+                .orElseThrow(() -> new IllegalStateException("Person " + personId + " exists"));
+    }
+
     public PersonEntity getByName(String personName) {
         return personRepository.findByPersonName(personName)
                 .orElseThrow(() -> new IllegalStateException("Person " + personName + " exists"));
