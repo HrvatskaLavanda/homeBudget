@@ -1,14 +1,13 @@
 package pl.glozaaleksandra.homebudget.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,9 +25,12 @@ public class ExpenseEntity {
     @Column(name = "expense_date_time")
     private Instant expenseDateTime;
 
-    @OneToOne
+    @OneToMany(mappedBy = "expense")
+    private List<BoughtProductsEntity> boughtProducts;
+
+    @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
-    private PersonEntity personEntity;
+    private PersonEntity person;
 
     @Override
     public String toString() {

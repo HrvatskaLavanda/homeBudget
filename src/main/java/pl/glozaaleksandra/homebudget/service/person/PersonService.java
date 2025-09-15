@@ -1,27 +1,39 @@
 package pl.glozaaleksandra.homebudget.service.person;
 
 import lombok.AllArgsConstructor;
-import pl.glozaaleksandra.homebudget.model.Person;
-import pl.glozaaleksandra.homebudget.nodatabase.repository.person.PersonRepository;
+import org.springframework.stereotype.Service;
+import pl.glozaaleksandra.homebudget.entities.PersonEntity;
+import pl.glozaaleksandra.homebudget.repository.PersonRepository;
 
 import java.util.Optional;
 
+@Service
 @AllArgsConstructor
 public class PersonService {
     private PersonRepository personRepository;
 
     public boolean personExistsByName(String personName) {
-        Optional<Person> possiblyFoundPerson = personRepository.getByName(personName);
+        Optional<PersonEntity> possiblyFoundPerson = personRepository.findByPersonName(personName);
         return possiblyFoundPerson.isPresent();
     }
 
-    public Person saveNewPerson(String personName) {
-        return personRepository.getByName(personName)
-                .orElseGet(() -> personRepository.addNewPerson(personName));
+    public PersonEntity saveNewPerson(String personName) {
+        return personRepository.findByPersonName(personName)
+                .orElseGet(() -> {
+                    PersonEntity person = PersonEntity.builder()
+                            .personName(personName)
+                            .build();
+                    return personRepository.save(person);
+                });
     }
 
-    public Person getByName(String personName) {
-        return personRepository.getByName(personName)
+    public PersonEntity getById(int personId) {
+        return personRepository.findByPersonId(personId)
+                .orElseThrow(() -> new IllegalStateException("Person " + personId + " exists"));
+    }
+
+    public PersonEntity getByName(String personName) {
+        return personRepository.findByPersonName(personName)
                 .orElseThrow(() -> new IllegalStateException("Person " + personName + " exists"));
     }
 }

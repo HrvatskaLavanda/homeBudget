@@ -1,9 +1,6 @@
 package pl.glozaaleksandra.homebudget.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +24,18 @@ public class BoughtProductsEntity {
 
     @Column(name = "quantity")
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "expense_id", referencedColumnName = "expense_id")
+    private ExpenseEntity expense;
+
+    @ManyToOne
+    @JoinColumn(name = "market_id", referencedColumnName = "market_id")
+    private MarketEntity market;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private ProductEntity product;
 
     @Override
     public String toString() {

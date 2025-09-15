@@ -5,8 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import pl.glozaaleksandra.homebudget.entities.*;
 import pl.glozaaleksandra.homebudget.repository.*;
+import pl.glozaaleksandra.homebudget.service.expenses.ExpenseService;
+import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class HomebudgetApplication {
@@ -29,6 +33,10 @@ public class HomebudgetApplication {
         List<PersonEntity> people = personRepository.findAll();
         System.out.println(people);
 
+        PersonService personService = context.getBean(PersonService.class);
+        PersonEntity personByID = personService.getById(1);
+        System.out.println(personByID);
+
         ExpenseRepository expenseRepository = context.getBean(ExpenseRepository.class);
         List<ExpenseEntity> expenses = expenseRepository.findAll();
         System.out.println(expenses);
@@ -36,6 +44,16 @@ public class HomebudgetApplication {
         BoughtProductsRepository boughtProductsRepository = context.getBean(BoughtProductsRepository.class);
         List<BoughtProductsEntity> boughtProducts = boughtProductsRepository.findAll();
         System.out.println(boughtProducts);
+
+        Instant purchaseTime = Instant.now();
+        String buyerName = "Kasia";
+        ExpenseService expenseService = context.getBean(ExpenseService.class);
+//        ExpenseEntity newExpense = expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime);
+//        System.out.println(newExpense);
+
+        ExpenseService expenseService1 = context.getBean(ExpenseService.class);
+        Optional<ExpenseEntity> expenseByPurchaseDateTime = expenseService1.getExpenseByPurchaseDateTime(purchaseTime);
+        System.out.println(expenseByPurchaseDateTime);
 
 
     }

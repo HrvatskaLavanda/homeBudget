@@ -1,23 +1,26 @@
 package pl.glozaaleksandra.homebudget.service.expenses;
 
 import lombok.AllArgsConstructor;
-import pl.glozaaleksandra.homebudget.model.Expense;
-import pl.glozaaleksandra.homebudget.model.Person;
-import pl.glozaaleksandra.homebudget.model.Product;
-import pl.glozaaleksandra.homebudget.nodatabase.repository.expense.ExpenseRepository;
+import org.springframework.stereotype.Service;
+import pl.glozaaleksandra.homebudget.entities.BoughtProductsEntity;
+import pl.glozaaleksandra.homebudget.entities.ExpenseEntity;
+import pl.glozaaleksandra.homebudget.entities.PersonEntity;
+import pl.glozaaleksandra.homebudget.repository.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 @AllArgsConstructor
 public class ExpenseService {
     private ExpenseRepository expenseRepository;
     private PersonService personService;
 
-    public Expense addNewExpense(String buyerName, List<Product> boughtProducts, Instant purchaseTime) {
-        Person person;
+    public ExpenseEntity addNewExpense(String buyerName, List<BoughtProductsEntity> boughtProducts, Instant purchaseTime) {
+        PersonEntity person;
         if (buyerName == null) {
             throw new IllegalArgumentException("Buyer name is null.");
         }
@@ -29,23 +32,29 @@ public class ExpenseService {
         } else {
             person = personService.saveNewPerson(buyerName);
         }
-        Expense expense = Expense.builder()
-                .expenseDatetime(purchaseTime)
-                .buyer(person)
-                .products(boughtProducts)
+        ExpenseEntity expense = ExpenseEntity.builder()
+                .expenseDateTime(purchaseTime)
+                .person(person)
+                .boughtProducts(boughtProducts)
+                .totalPrice(BigDecimal.valueOf(100))
                 .build();
         return expenseRepository.save(expense);
     }
 
-    public Optional<Expense> getExpenseByPurchaseDateTime(Instant purchaseTime) {
+    public Optional<ExpenseEntity> getExpenseByPurchaseDateTime(Instant purchaseTime) {
         if (purchaseTime == null) {
             throw new IllegalArgumentException("No purchase time");
         }
-        List<Expense> expenses = expenseRepository.findAll();
-        for (Expense expense : expenses)
-            if (purchaseTime.equals(expense.getExpenseDatetime())) {
+        List<ExpenseEntity> expenses = expenseRepository.findAll();
+        for (ExpenseEntity expense : expenses)
+            if (purchaseTime.equals(expense.getExpenseDateTime())) {
                 return Optional.of(expense);
             }
         return Optional.empty();
+    }
+
+    public List<ExpenseEntity> getAll() {
+        List<ExpenseEntity> allExpenses = expenseRepository.findAll();
+        return allExpenses;
     }
 }
