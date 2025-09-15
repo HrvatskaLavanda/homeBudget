@@ -1,16 +1,19 @@
 package pl.glozaaleksandra.homebudget.service.expenses;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import pl.glozaaleksandra.homebudget.entities.BoughtProductsEntity;
 import pl.glozaaleksandra.homebudget.entities.ExpenseEntity;
 import pl.glozaaleksandra.homebudget.entities.PersonEntity;
 import pl.glozaaleksandra.homebudget.repository.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 @AllArgsConstructor
 public class ExpenseService {
     private ExpenseRepository expenseRepository;
@@ -33,6 +36,7 @@ public class ExpenseService {
                 .expenseDateTime(purchaseTime)
                 .person(person)
                 .boughtProducts(boughtProducts)
+                .totalPrice(BigDecimal.valueOf(100))
                 .build();
         return expenseRepository.save(expense);
     }

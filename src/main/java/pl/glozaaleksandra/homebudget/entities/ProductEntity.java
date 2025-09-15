@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,23 +22,23 @@ public class ProductEntity {
     @Column(name = "product_name")
     private String productName;
 
-    @OneToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private CategoryEntity categoryEntity;
+//    @OneToOne
+//    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+//    private CategoryEntity categoryEntity;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private CategoryEntity category;
 
     @OneToMany(mappedBy = "product")
-    private BoughtProductsEntity boughtProducts;
+    private List<BoughtProductsEntity> boughtProducts;
 
     @Override
     public String toString() {
         return "ProductEntity{" +
                 "productId=" + productId +
                 ", productName='" + productName + '\'' +
-                ", categoryEntity=" + categoryEntity +
+                ", categoryEntity=" + category +
                 '}';
     }
 }

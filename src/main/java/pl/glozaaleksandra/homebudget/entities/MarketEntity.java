@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class MarketEntity {
     private String marketName;
 
     @OneToMany(mappedBy = "market")
-    private BoughtProductsEntity boughtProducts;
+    private List<BoughtProductsEntity> boughtProducts;
 
     @Override
     public String toString() {
