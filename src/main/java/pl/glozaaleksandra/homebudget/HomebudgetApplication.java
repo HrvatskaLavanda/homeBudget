@@ -48,8 +48,8 @@ public class HomebudgetApplication {
         Instant purchaseTime = Instant.now();
         String buyerName = "Kasia";
         ExpenseService expenseService = context.getBean(ExpenseService.class);
-//        ExpenseEntity newExpense = expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime);
-//        System.out.println(newExpense);
+        ExpenseEntity newExpense = expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime);
+        System.out.println(newExpense);
 
         ExpenseService expenseService1 = context.getBean(ExpenseService.class);
         Optional<ExpenseEntity> expenseByPurchaseDateTime = expenseService1.getExpenseByPurchaseDateTime(purchaseTime);

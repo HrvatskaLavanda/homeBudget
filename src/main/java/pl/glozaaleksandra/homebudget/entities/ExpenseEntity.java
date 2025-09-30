@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 public class ExpenseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "expense_id")
     private int expenseId;
 
