@@ -24,7 +24,7 @@ create table expense(
 expense_id serial not null,
 person_id integer not null,
 total_price decimal(10, 2) not null,
-expense_date_time date not null,
+expense_date_time timestamp not null,
 primary key(expense_id),
 foreign key(person_id) references person(person_id)
 );
@@ -44,5 +44,5 @@ INSERT INTO category(category_name) VALUES ('Food');
 INSERT INTO product(product_name, category_id) VALUES('Banana', 1);
 INSERT INTO markets(market_name) VALUES('Plodine');
 INSERT INTO person(person_name) VALUES('Ivana');
-INSERT INTO expense(person_id, total_price, expense_date_time) VALUES (1, 10, '07-09-2025');
+INSERT INTO expense(person_id, total_price, expense_date_time) VALUES (1, 10, '2025-01-08 04:05:06');
 INSERT INTO bought_products(product_price, quantity, product_id, expense_id, market_id) VALUES (2, 1, 1, 1, 1);

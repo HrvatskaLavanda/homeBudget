@@ -20,13 +20,10 @@ public class ExpenseService {
     private PersonService personService;
 
     public ExpenseEntity addNewExpense(String buyerName, List<BoughtProductsEntity> boughtProducts, Instant purchaseTime) {
+
+        validateParameteres(buyerName, boughtProducts);
+
         PersonEntity person;
-        if (buyerName == null) {
-            throw new IllegalArgumentException("Buyer name is null.");
-        }
-        if (boughtProducts == null || boughtProducts.isEmpty()) {
-            throw new IllegalArgumentException("Buyer name is null.");
-        }
         if (personService.personExistsByName(buyerName)) {
             person = personService.getByName(buyerName);
         } else {
@@ -39,6 +36,15 @@ public class ExpenseService {
                 .totalPrice(BigDecimal.valueOf(100))
                 .build();
         return expenseRepository.save(expense);
+    }
+
+    private static void validateParameteres(String buyerName, List<BoughtProductsEntity> boughtProducts) {
+        if (buyerName == null) {
+            throw new IllegalArgumentException("Buyer name is null.");
+        }
+        if (boughtProducts == null || boughtProducts.isEmpty()) {
+            throw new IllegalArgumentException("Buyer name is null.");
+        }
     }
 
     public Optional<ExpenseEntity> getExpenseByPurchaseDateTime(Instant purchaseTime) {
