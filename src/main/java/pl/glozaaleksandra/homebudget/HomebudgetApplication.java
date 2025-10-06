@@ -7,6 +7,7 @@ import pl.glozaaleksandra.homebudget.entities.*;
 import pl.glozaaleksandra.homebudget.repository.*;
 import pl.glozaaleksandra.homebudget.service.expenses.ExpenseService;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
+import pl.glozaaleksandra.time.TimeProvider;
 
 import java.time.Instant;
 import java.util.List;
@@ -45,14 +46,14 @@ public class HomebudgetApplication {
         List<BoughtProductsEntity> boughtProducts = boughtProductsRepository.findAll();
         System.out.println(boughtProducts);
 
-        Instant purchaseTime = Instant.now();
+        Instant purchaseTime = TimeProvider.now();
         String buyerName = "Kasia";
         ExpenseService expenseService = context.getBean(ExpenseService.class);
-//        ExpenseEntity newExpense = expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime);
-//        System.out.println(newExpense);
+        ExpenseEntity newExpense = expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime);
+        System.out.println(newExpense);
 
-        ExpenseService expenseService1 = context.getBean(ExpenseService.class);
-        Optional<ExpenseEntity> expenseByPurchaseDateTime = expenseService1.getExpenseByPurchaseDateTime(purchaseTime);
+
+        Optional<ExpenseEntity> expenseByPurchaseDateTime = expenseService.getExpenseByPurchaseDateTime(purchaseTime);
         System.out.println(expenseByPurchaseDateTime);
 
 
