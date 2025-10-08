@@ -22,13 +22,8 @@ public class ExpenseService {
     public ExpenseEntity addNewExpense(String buyerName, List<BoughtProductsEntity> boughtProducts, Instant purchaseTime) {
 
         validateParameteres(buyerName, boughtProducts);
+        PersonEntity person = getOrCreatePersonByName(buyerName);
 
-        PersonEntity person;
-        if (personService.personExistsByName(buyerName)) {
-            person = personService.getByName(buyerName);
-        } else {
-            person = personService.saveNewPerson(buyerName);
-        }
         ExpenseEntity expense = ExpenseEntity.builder()
                 .expenseDateTime(purchaseTime)
                 .person(person)
@@ -36,6 +31,14 @@ public class ExpenseService {
                 .totalPrice(BigDecimal.valueOf(100))
                 .build();
         return expenseRepository.save(expense);
+    }
+
+    private PersonEntity getOrCreatePersonByName(String buyerName) {
+        if (personService.personExistsByName(buyerName)) {
+            return personService.getByName(buyerName);
+        } else {
+            return personService.saveNewPerson(buyerName);
+        }
     }
 
     private static void validateParameteres(String buyerName, List<BoughtProductsEntity> boughtProducts) {
