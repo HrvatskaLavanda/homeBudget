@@ -1,9 +1,8 @@
 package pl.glozaaleksandra.homebudget.service.category;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.glozaaleksandra.homebudget.model.Category;
-import pl.glozaaleksandra.homebudget.nodatabase.repository.category.CategoryRepository;
+import pl.glozaaleksandra.homebudget.entities.CategoryEntity;
+import pl.glozaaleksandra.homebudget.repository.CategoryRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,30 +11,33 @@ import java.util.Optional;
 public class CategoryService {
     private CategoryRepository categoryRepository;
 
-    public CategoryService(@Autowired CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository; // wstrzykniecie -> = (injection)
     }
 
-    public List<Category> findAll() {
+    public List<CategoryEntity> findAll() {
         // zwracasz wszystkie z repo
         return categoryRepository.findAll();
     }
 
-    public Category findByName(String categoryName) {
-        return categoryRepository.findByName(categoryName)
+    public CategoryEntity findByName(String categoryName) {
+        return categoryRepository.findByCategoryName(categoryName)
                 .orElseThrow(() -> new IllegalArgumentException("Category " + categoryName + " not found"));
     }
 
-    public Category saveNewCategory(String food) {
+    public CategoryEntity saveNewCategory(String categoryName) {
         //pusty Optional, lub niepusty Optional
-//        categoryRepository.findByName(food)
-//                .orElseGet(() -> categoryRepository.save(new Category(food))); //.orElse zawsze się wykona, dlatego nie poszedł test nr 2
+//        categoryRepository.findByName(categoryName)
+//                .orElseGet(() -> categoryRepository.save(new Category(categoryName))); //.orElse zawsze się wykona, dlatego nie poszedł test nr 2
 
-        Optional<Category> possiblyFoundCategory = categoryRepository.findByName(food);
+        Optional<CategoryEntity> possiblyFoundCategory = categoryRepository.findByCategoryName(categoryName);
         if (possiblyFoundCategory.isPresent()) {
             return possiblyFoundCategory.get();
         } else {
-            Category newCategory = categoryRepository.save(new Category(food));
+            CategoryEntity category = CategoryEntity.builder()
+                    .categoryName(categoryName)
+                    .build();
+            CategoryEntity newCategory = categoryRepository.save(category);
             return newCategory;
         }
     }

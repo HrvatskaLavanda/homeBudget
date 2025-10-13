@@ -1,10 +1,7 @@
 package pl.glozaaleksandra.homebudget.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "category")
 @Entity
+@Builder
 public class CategoryEntity {
     @Id
     @Column(name = "category_id")

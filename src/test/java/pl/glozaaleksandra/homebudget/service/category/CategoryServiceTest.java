@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import pl.glozaaleksandra.homebudget.model.Category;
-import pl.glozaaleksandra.homebudget.nodatabase.repository.category.CategoryRepository;
+import pl.glozaaleksandra.homebudget.entities.CategoryEntity;
+import pl.glozaaleksandra.homebudget.repository.CategoryRepository;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ class CategoryServiceTest {
     @Mock
     private CategoryRepository categoryRepository;
     @Mock
-    private Category category;
+    private CategoryEntity category;
 
     private CategoryService categoryService;
 
@@ -30,14 +30,14 @@ class CategoryServiceTest {
     @Test
     public void shouldAddNewCategory() {
         // given
-        Category expected = Category.builder()
-                .name("Food")
+        CategoryEntity expected = CategoryEntity.builder()
+                .categoryName("Food")
                 .build();
-        when(categoryRepository.findByName(eq("Food"))).thenReturn(Optional.empty());
+        when(categoryRepository.findByCategoryName(eq("Food"))).thenReturn(Optional.empty());
         when(categoryRepository.save(eq(expected))).thenReturn(expected);
 
         //when
-        Category newCategory = categoryService.saveNewCategory("Food");
+        CategoryEntity newCategory = categoryService.saveNewCategory("Food");
 
         //then
         verify(categoryRepository).save(eq(expected));
@@ -49,13 +49,13 @@ class CategoryServiceTest {
     @Test
     public void shouldReturnAlreadyExistingCategory() {
         // given
-        Category expected = Category.builder()
-                .name("Food")
+        CategoryEntity expected = CategoryEntity.builder()
+                .categoryName("Food")
                 .build();
-        when(categoryRepository.findByName(eq("Food"))).thenReturn(Optional.of(category));
+        when(categoryRepository.findByCategoryName(eq("Food"))).thenReturn(Optional.of(category));
 
         //when
-        Category shouldBeTheSame = categoryService.saveNewCategory("Food");
+        CategoryEntity shouldBeTheSame = categoryService.saveNewCategory("Food");
 
         //then
         verify(categoryRepository, times(0)).save(eq(expected));
