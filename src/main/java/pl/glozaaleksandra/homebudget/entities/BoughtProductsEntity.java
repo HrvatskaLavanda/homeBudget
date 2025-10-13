@@ -16,8 +16,9 @@ import java.math.BigDecimal;
 @Entity
 public class BoughtProductsEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bought_product_id")
-    private int boughtProductId;
+    private Integer boughtProductId;
 
     @Column(name = "product_price")
     private BigDecimal productPrice;
