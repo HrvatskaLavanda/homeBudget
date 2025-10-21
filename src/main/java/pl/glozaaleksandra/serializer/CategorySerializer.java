@@ -5,10 +5,11 @@ import pl.glozaaleksandra.homebudget.model.Category;
 
 public class CategorySerializer {
     public static Category fromEntity(CategoryEntity categoryEntity) {
-        Category category = new Category();
-        category.setCategoryId(categoryEntity.getCategoryId());
-        category.setName(categoryEntity.getCategoryName());
-        category.setProducts(categoryEntity.getProducts());
+        Category category = Category.builder()
+                .categoryId(categoryEntity.getCategoryId())
+                .name(categoryEntity.getCategoryName())
+                .products(categoryEntity.getProducts())
+                .build();
         return category;
     }
 }
