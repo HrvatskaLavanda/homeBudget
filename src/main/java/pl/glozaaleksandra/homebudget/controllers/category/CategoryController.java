@@ -11,10 +11,10 @@ import pl.glozaaleksandra.serializer.CategorySerializer;
 import java.util.List;
 
 @RestController
-public class CategoryControllery {
+public class CategoryController {
     private CategoryService categoryService;
 
-    public CategoryControllery(@Autowired CategoryService categoryService) {
+    public CategoryController(@Autowired CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
