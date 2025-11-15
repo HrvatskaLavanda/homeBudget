@@ -9,10 +9,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import pl.glozaaleksandra.homebudget.model.Expense;
-import pl.glozaaleksandra.homebudget.model.Person;
-import pl.glozaaleksandra.homebudget.model.Product;
-import pl.glozaaleksandra.homebudget.nodatabase.repository.expense.ExpenseRepository;
+import pl.glozaaleksandra.homebudget.entities.BoughtProductsEntity;
+import pl.glozaaleksandra.homebudget.entities.ExpenseEntity;
+import pl.glozaaleksandra.homebudget.entities.PersonEntity;
+import pl.glozaaleksandra.homebudget.repository.ExpenseRepository;
 import pl.glozaaleksandra.homebudget.service.person.PersonService;
 
 import java.time.Duration;
@@ -35,21 +35,19 @@ class ExpenseServiceTest {
     private PersonService personService;
 
     @Mock
-    private Product product1;
+    private BoughtProductsEntity product1;
 
     @Mock
-    private Product product2;
+    private BoughtProductsEntity product2;
 
     @Mock
-    private Person person;
+    private PersonEntity person;
 
     @Mock
-    private Expense expense;
+    private ExpenseEntity expense;
 
     @Mock
-    private Expense expense2;
-
-    private List<Person> people;
+    private ExpenseEntity expense2;
 
     private ExpenseService expenseService;
 
@@ -65,11 +63,11 @@ class ExpenseServiceTest {
     public void shouldGetExpenseByDateTime() {
         // given
         when(expenseRepository.findAll()).thenReturn(List.of(expense, expense2));
-        when(expense.getExpenseDatetime()).thenReturn(Instant.now().plus(Duration.ofMinutes(5)));
-        when(expense2.getExpenseDatetime()).thenReturn(PURCHASE_TIME);
+        when(expense.getExpenseDateTime()).thenReturn(Instant.now().plus(Duration.ofMinutes(5)));
+        when(expense2.getExpenseDateTime()).thenReturn(PURCHASE_TIME);
 
         // when
-        Optional<Expense> actual = expenseService.getExpenseByPurchaseDateTime(PURCHASE_TIME);
+        Optional<ExpenseEntity> actual = expenseService.getExpenseByPurchaseDateTime(PURCHASE_TIME);
 
         // then
         Assertions.assertNotNull(actual);
@@ -81,12 +79,12 @@ class ExpenseServiceTest {
     public void shouldNotGetExpenseByDateTime() {
         //given
         when(expenseRepository.findAll()).thenReturn(List.of(expense, expense2));
-        when(expense.getExpenseDatetime()).thenReturn(Instant.now().plus(Duration.ofMinutes(5)));
-        when(expense2.getExpenseDatetime()).thenReturn(Instant.now().plus(Duration.ofMinutes(15)));
+        when(expense.getExpenseDateTime()).thenReturn(Instant.now().plus(Duration.ofMinutes(5)));
+        when(expense2.getExpenseDateTime()).thenReturn(Instant.now().plus(Duration.ofMinutes(15)));
 
 
         //when
-        Optional<Expense> actual = expenseService.getExpenseByPurchaseDateTime(PURCHASE_TIME);
+        Optional<ExpenseEntity> actual = expenseService.getExpenseByPurchaseDateTime(PURCHASE_TIME);
 
         //then
         Assertions.assertNotNull(actual);
@@ -96,44 +94,44 @@ class ExpenseServiceTest {
     @Test
     public void shouldAddNewExpense() {
         // given
-        List<Product> products = List.of(product1, product2);
+        List<BoughtProductsEntity> products = List.of(product1, product2);
         when(personService.personExistsByName(eq(ANY_NAME))).thenReturn(true);
         when(personService.getByName(eq(ANY_NAME))).thenReturn(person);
         when(expenseRepository.save(any())).thenReturn(expense);
-        when(expense.getExpenseDatetime()).thenReturn(PURCHASE_TIME);
-        when(expense.getBuyer()).thenReturn(person);
-        when(expense.getProducts()).thenReturn(products);
+        when(expense.getExpenseDateTime()).thenReturn(PURCHASE_TIME);
+        when(expense.getPerson()).thenReturn(person);
+        when(expense.getBoughtProducts()).thenReturn(products);
 
         // when
-        Expense expected = expenseService.addNewExpense(ANY_NAME, products, PURCHASE_TIME);
+        ExpenseEntity expected = expenseService.addNewExpense(ANY_NAME, products, PURCHASE_TIME);
 
         // then
-        Assertions.assertEquals(PURCHASE_TIME, expected.getExpenseDatetime());
-        Assertions.assertEquals(person, expected.getBuyer());
-        Assertions.assertEquals(products, expected.getProducts());
+        Assertions.assertEquals(PURCHASE_TIME, expected.getExpenseDateTime());
+        Assertions.assertEquals(person, expected.getPerson());
+        Assertions.assertEquals(products, expected.getBoughtProducts());
     }
 
     @Test
     public void shouldAddNewPersonWithExpenseIfNotOnTheList() {
         //given
-        Person newPerson = new Person(ANY_NAME);
-        List<Product> products = List.of(product1, product2);
+        PersonEntity newPerson = new PersonEntity();
+        List<BoughtProductsEntity> products = List.of(product1, product2);
         when(personService.personExistsByName(eq(ANY_NAME))).thenReturn(false);
         //jeżeli osoby nie ma to dodaj:
-        when(personService.saveNewPerson(eq(ANY_NAME))).thenReturn(new Person(ANY_NAME));
+        when(personService.saveNewPerson(eq(ANY_NAME))).thenReturn(newPerson);
         when(personService.getByName(eq(ANY_NAME))).thenReturn(newPerson);
         when(expenseRepository.save(any())).thenReturn(expense);
-        when(expense.getExpenseDatetime()).thenReturn(PURCHASE_TIME);
-        when(expense.getBuyer()).thenReturn(newPerson);
-        when(expense.getProducts()).thenReturn(products);
+        when(expense.getExpenseDateTime()).thenReturn(PURCHASE_TIME);
+        when(expense.getPerson()).thenReturn(newPerson);
+        when(expense.getBoughtProducts()).thenReturn(products);
 
         //when
-        Expense expected = expenseService.addNewExpense(ANY_NAME, products, PURCHASE_TIME);
+        ExpenseEntity expected = expenseService.addNewExpense(ANY_NAME, products, PURCHASE_TIME);
 
         //then
-        Assertions.assertEquals(PURCHASE_TIME, expected.getExpenseDatetime());
-        Assertions.assertEquals(newPerson, expected.getBuyer());
-        Assertions.assertEquals(products, expected.getProducts());
+        Assertions.assertEquals(PURCHASE_TIME, expected.getExpenseDateTime());
+        Assertions.assertEquals(newPerson, expected.getPerson());
+        Assertions.assertEquals(products, expected.getBoughtProducts());
 
     }
 
@@ -150,7 +148,7 @@ class ExpenseServiceTest {
 
     @ParameterizedTest
     @MethodSource("allNullEmptyFutureTimeExamples")
-    public void shouldThrowExceptionWhenAnyExpenseParameterIsNull(String buyerName, List<Product> boughtProducts, Instant purchaseTime) {
+    public void shouldThrowExceptionWhenAnyExpenseParameterIsNull(String buyerName, List<BoughtProductsEntity> boughtProducts, Instant purchaseTime) {
         Assertions.assertThrows(IllegalArgumentException.class, () -> expenseService.addNewExpense(buyerName, boughtProducts, purchaseTime));
     }
 

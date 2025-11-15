@@ -15,7 +15,10 @@ class ListBasedProductRepositoryTest {
 
     private ListBasedProductRepository repository = new ListBasedProductRepository();
 
-    private static final Category FRUITS_CATEGORY = new Category("Fruits");
+    private static final Category FRUITS_CATEGORY = Category.builder()
+            .name("Fruits")
+            .build();
+
     private static final Product PRODUCT = new Product(BigDecimal.valueOf(100), "apple", FRUITS_CATEGORY);
 
     @Test
