@@ -36,5 +36,4 @@ class CategoryControllerTest {
                 //then
                 .andExpect(status().isOk());
     }
-
 }
